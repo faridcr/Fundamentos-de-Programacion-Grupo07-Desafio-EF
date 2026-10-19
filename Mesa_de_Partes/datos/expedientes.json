@@ -1,0 +1,62 @@
+[
+    {
+        "codigo": "E-1",
+        "dni": "12345678",
+        "asunto": "basura",
+        "descripcion": "basura",
+        "direccion": "las lfores",
+        "estado": "Atendido",
+        "gerencia": "Gestión Ambiental",
+        "subgerencia": "Limpieza Pública",
+        "atencion": "Hemos realizado",
+        "respuesta": "Pendiente"
+    },
+    {
+        "codigo": "E-2",
+        "dni": "87654321",
+        "asunto": "Poda de árboles",
+        "descripcion": "Árboles que necesitan mantenimiento",
+        "direccion": "Av. Los Jardines 120",
+        "estado": "Derivado a gerencia",
+        "gerencia": "Gestión Ambiental",
+        "subgerencia": "Sin asignar",
+        "atencion": "Pendiente",
+        "respuesta": "Pendiente"
+    },
+    {
+        "codigo": "E-3",
+        "dni": "45678912",
+        "asunto": "Recojo de basura",
+        "descripcion": "Se solicitó el recojo de residuos acumulados",
+        "direccion": "Jr. Las Flores 250",
+        "estado": "Cerrado",
+        "gerencia": "Gestión Ambiental",
+        "subgerencia": "Limpieza Pública",
+        "atencion": "Se realizó el recojo de residuos",
+        "respuesta": "Su solicitud fue atendida correctamente"
+    },
+    {
+        "codigo": "E-4",
+        "dni": "70531811",
+        "asunto": "Falta de patrullaje",
+        "descripcion": "Se solicita patrullaje por robos frecuentes.",
+        "direccion": "av. los heroes",
+        "estado": "Cerrado",
+        "gerencia": "Seguridad Ciudadana y Vial",
+        "subgerencia": "Sin asignar",
+        "atencion": "exitoso",
+        "respuesta": "realizado correctamente"
+    },
+    {
+        "codigo": "E-5",
+        "dni": "55667788",
+        "asunto": "Vereda deteriorada",
+        "descripcion": "La vereda presenta grietas y dificulta el paso peatonal.}",
+        "direccion": "lAS FLORES",
+        "estado": "Derivado a gerencia",
+        "gerencia": "Desarrollo Urbano",
+        "subgerencia": "Sin asignar",
+        "atencion": "Pendiente",
+        "respuesta": "Pendiente"
+    }
+]
