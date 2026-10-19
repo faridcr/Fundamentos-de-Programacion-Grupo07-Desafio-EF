@@ -1,12 +1,23 @@
+
 import json
+import os
 from ciudadano import Ciudadano
 from expediente import Expediente
 from estado import ciudadanos, expedientes
 
 
+# UBICACION DE LOS ARCHIVOS JSON
+CARPETA = os.path.dirname(os.path.abspath(__file__))
+
+
+def ruta(nombre):
+    return os.path.join(CARPETA, "datos", nombre)
+
+
+# CARGAR CIUDADANOS
 def cargar_ciudadanos():
 
-    with open("datos/ciudadanos.json", "r", encoding="utf-8") as archivo:
+    with open(ruta("ciudadanos.json"), "r", encoding="utf-8") as archivo:
         datos = json.load(archivo)
 
     for dato in datos:
@@ -21,6 +32,7 @@ def cargar_ciudadanos():
         ciudadanos.append(ciudadano)
 
 
+# GUARDAR CIUDADANOS
 def guardar_ciudadanos():
 
     datos = []
@@ -36,13 +48,14 @@ def guardar_ciudadanos():
 
         datos.append(dato)
 
-    with open("datos/ciudadanos.json", "w", encoding="utf-8") as archivo:
+    with open(ruta("ciudadanos.json"), "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
 
+# CARGAR EXPEDIENTES
 def cargar_expedientes():
 
-    with open("datos/expedientes.json", "r", encoding="utf-8") as archivo:
+    with open(ruta("expedientes.json"), "r", encoding="utf-8") as archivo:
         datos = json.load(archivo)
 
     for dato in datos:
@@ -64,6 +77,7 @@ def cargar_expedientes():
         expedientes.append(expediente)
 
 
+# GUARDAR EXPEDIENTES
 def guardar_expedientes():
 
     datos = []
@@ -85,5 +99,5 @@ def guardar_expedientes():
 
         datos.append(dato)
 
-    with open("datos/expedientes.json", "w", encoding="utf-8") as archivo:
+    with open(ruta("expedientes.json"), "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
