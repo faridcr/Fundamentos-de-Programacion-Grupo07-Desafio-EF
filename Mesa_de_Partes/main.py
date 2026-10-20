@@ -1,13 +1,118 @@
 from ciudadano import Ciudadano
 from estado import ciudadanos
-from almacenamiento import cargar_ciudadanos, guardar_ciudadanos, cargar_expedientes
+from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
+from validaciones import dni_valido, correo_valido, nombre_valido
+
+
+def existe_ciudadano(dni):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.dni == dni:
+            return True
+
+    return False
+
+
+def pedir_dni():
+
+    while True:
+
+        dni = input("Ingrese DNI: ").strip()
+
+        if dni_valido(dni):
+            return dni
+
+        print("ERROR: El DNI debe tener 8 números.")
+
+
+def pedir_nombre(etiqueta):
+
+    while True:
+
+        texto = input("Ingrese " + etiqueta + ": ").strip()
+
+        if nombre_valido(texto):
+            return texto
+
+        print("Ingrese un", etiqueta, "válido (solo letras).")
+
+
+def pedir_correo():
+
+    while True:
+
+        correo = input("Ingrese correo: ").strip()
+
+        if correo_valido(correo):
+            return correo
+
+        print("Correo incorrecto. Ejemplo: nombre@dominio.com")
+
+
+def registrar_ciudadano():
+
+    print("\n=== REGISTRO DE CIUDADANO ===")
+
+    dni = pedir_dni()
+
+    if existe_ciudadano(dni):
+        print("Este ciudadano ya está registrado.")
+        return
+
+    nombre = pedir_nombre("nombre")
+    apellido = pedir_nombre("apellido")
+    correo = pedir_correo()
+
+    ciudadano = Ciudadano(dni, nombre, apellido, correo)
+
+    ciudadanos.append(ciudadano)
+    guardar_ciudadanos()
+
+    print("\nCiudadano registrado correctamente.")
+    ciudadano.mostrar_datos()
+
+    menu_ciudadano(dni)
+
+
+def acceso_ciudadano_registrado():
+
+    dni = pedir_dni()
+
+    if existe_ciudadano(dni):
+        print("Bienvenido al sistema.")
+        menu_ciudadano(dni)
+
+    else:
+        print("Ciudadano no registrado.")
+
+
+def menu_acceso_ciudadano():
+
+    print("\n=== ACCESO CIUDADANO ===")
+    print("1. Registrar nuevo ciudadano")
+    print("2. Ya estoy registrado")
+    print("3. Volver")
+
+    opcion = input("Elige una opción: ")
+
+    if opcion == "1":
+        registrar_ciudadano()
+
+    elif opcion == "2":
+        acceso_ciudadano_registrado()
+
+    elif opcion == "3":
+        print("Volviendo al menú principal.")
+
+    else:
+        print("Opción incorrecta.")
 
 
 # CARGAR DATOS AL INICIAR
-cargar_ciudadanos()
-cargar_expedientes()
+cargar_todo()
 
 
 # MENU PRINCIPAL
@@ -21,109 +126,7 @@ while True:
     opcion = input("Elige una opción: ")
 
     if opcion == "1":
-
-        print("\n=== ACCESO CIUDADANO ===")
-        print("1. Registrar nuevo ciudadano")
-        print("2. Ya estoy registrado")
-        print("3. Volver")
-
-        opcion_ciudadano = input("Elige una opción: ")
-
-        if opcion_ciudadano == "1":
-
-            print("\n=== REGISTRO DE CIUDADANO ===")
-
-            while True:
-
-                dni = input("Ingrese DNI: ").strip()
-
-                if len(dni) == 8 and dni.isdigit():
-                    break
-
-                else:
-                    print("ERROR: El DNI debe tener 8 números.")
-
-            repetido = False
-
-            for ciudadano in ciudadanos:
-
-                if ciudadano.dni == dni:
-                    repetido = True
-                    break
-
-            if repetido == True:
-
-                print("Este ciudadano ya está registrado.")
-
-            else:
-
-                while True:
-
-                    nombre = input("Ingrese nombre: ").strip()
-
-                    if nombre != "" and not nombre.isdigit():
-                        break
-
-                    else:
-                        print("Ingrese un nombre válido.")
-
-                while True:
-
-                    apellido = input("Ingrese apellido: ").strip()
-
-                    if apellido != "" and not apellido.isdigit():
-                        break
-
-                    else:
-                        print("Ingrese un apellido válido.")
-
-                while True:
-
-                    correo = input("Ingrese correo: ").strip()
-
-                    if "@" in correo and "." in correo:
-                        break
-
-                    else:
-                        print("Correo incorrecto.")
-
-                ciudadano = Ciudadano(
-                    dni, nombre, apellido, correo
-                )
-
-                ciudadanos.append(ciudadano)
-                guardar_ciudadanos()
-
-                print("\nCiudadano registrado correctamente.")
-                ciudadano.mostrar_datos()
-
-                menu_ciudadano(dni)
-
-        elif opcion_ciudadano == "2":
-
-            dni = input("Ingrese DNI: ").strip()
-
-            encontrado = False
-
-            for ciudadano in ciudadanos:
-
-                if ciudadano.dni == dni:
-                    encontrado = True
-                    break
-
-            if encontrado == True:
-
-                print("Bienvenido al sistema.")
-                menu_ciudadano(dni)
-
-            else:
-                print("Ciudadano no registrado.")
-
-        elif opcion_ciudadano == "3":
-            print("Volviendo al menú principal.")
-
-        else:
-            print("Opción incorrecta.")
+        menu_acceso_ciudadano()
 
     elif opcion == "2":
         iniciar_sesion()

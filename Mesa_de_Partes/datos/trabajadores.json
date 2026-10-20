@@ -1,0 +1,56 @@
+[
+    {
+        "dni": "20304050",
+        "nombre": "Carlos",
+        "apellido": "Perez",
+        "correo": "carlos@gmail.com",
+        "usuario": "mesa",
+        "contrasena": "mesa123",
+        "area": "Mesa de Partes"
+    },
+    {
+        "dni": "30405060",
+        "nombre": "Pedro",
+        "apellido": "Lopez",
+        "correo": "pedro@gmail.com",
+        "usuario": "g1",
+        "contrasena": "demo123",
+        "area": "Gestión Ambiental"
+    },
+    {
+        "dni": "11223344",
+        "nombre": "Luis",
+        "apellido": "Ramirez",
+        "correo": "luis@gmail.com",
+        "usuario": "s1",
+        "contrasena": "demo123",
+        "area": "Limpieza Pública"
+    },
+    {
+        "dni": "44556677",
+        "nombre": "Miguel",
+        "apellido": "Torres",
+        "correo": "miguel@gmail.com",
+        "usuario": "g2",
+        "contrasena": "demo123",
+        "area": "Seguridad Ciudadana y Vial"
+    },
+    {
+        "dni": "50607080",
+        "nombre": "Ana",
+        "apellido": "Gomez",
+        "correo": "ana@gmail.com",
+        "usuario": "g3",
+        "contrasena": "demo123",
+        "area": "Desarrollo Urbano"
+    },
+    {
+        "dni": "60708090",
+        "nombre": "Rosa",
+        "apellido": "Vargas",
+        "correo": "rosa@gmail.com",
+        "usuario": "s2",
+        "contrasena": "demo123",
+        "area": "Parques y Jardines"
+    }
+]
