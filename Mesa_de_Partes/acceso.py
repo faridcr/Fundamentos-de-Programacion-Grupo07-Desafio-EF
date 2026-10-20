@@ -1,6 +1,36 @@
-from estado import trabajadores
+from estado import trabajadores, gerencias, subgerencias
 from menu_mesa_partes import menu_mesa_partes
-from menu_gerencias import menu_gestion_ambiental, menu_limpieza_publica, menu_seguridad_ciudadana, menu_desarrollo_urbano
+from menu_gerencias import menu_gerencia_con_subgerencias, menu_atencion
+
+
+def abrir_menu(area):
+
+    if area == "Mesa de Partes":
+        menu_mesa_partes()
+        return
+
+    if area in gerencias:
+
+        tiene_subgerencias = False
+
+        for subgerencia in subgerencias:
+            if subgerencia.gerencia == area:
+                tiene_subgerencias = True
+
+        if tiene_subgerencias:
+            menu_gerencia_con_subgerencias(area)
+        else:
+            menu_atencion(area, "gerencia")
+
+        return
+
+    for subgerencia in subgerencias:
+
+        if subgerencia.nombre == area:
+            menu_atencion(area, "subgerencia")
+            return
+
+    print("El menú de esta área todavía no está disponible.")
 
 
 def iniciar_sesion():
@@ -10,36 +40,14 @@ def iniciar_sesion():
     usuario = input("Ingrese usuario: ").strip()
     contrasena = input("Ingrese contraseña: ").strip()
 
-    encontrado = False
-
     for trabajador in trabajadores:
 
-        if trabajador.usuario == usuario and trabajador.contrasena == contrasena:
-
-            encontrado = True
+        if trabajador.usuario == usuario and trabajador.verificar_contrasena(contrasena):
 
             print("\nBienvenido:", trabajador.nombre)
             print("Área:", trabajador.area)
 
-            if trabajador.area == "Mesa de Partes":
-                menu_mesa_partes()
+            abrir_menu(trabajador.area)
+            return
 
-            elif trabajador.area == "Gestión Ambiental":
-                menu_gestion_ambiental()
-
-            elif trabajador.area == "Limpieza Pública":
-                menu_limpieza_publica()
-
-            elif trabajador.area == "Seguridad Ciudadana y Vial":
-                menu_seguridad_ciudadana()
-
-            elif trabajador.area == "Desarrollo Urbano":
-                menu_desarrollo_urbano()
-
-            else:
-                print("El menú de esta área todavía no está disponible.")
-
-            break
-
-    if encontrado == False:
-        print("Usuario o contraseña incorrectos.")
+    print("Usuario o contraseña incorrectos.")

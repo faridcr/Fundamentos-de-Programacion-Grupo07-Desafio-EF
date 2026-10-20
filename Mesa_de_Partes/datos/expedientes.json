@@ -9,7 +9,8 @@
         "gerencia": "Gestión Ambiental",
         "subgerencia": "Limpieza Pública",
         "atencion": "Hemos realizado",
-        "respuesta": "Pendiente"
+        "respuesta": "Pendiente",
+        "motivo_devolucion": "Ninguno"
     },
     {
         "codigo": "E-2",
@@ -21,7 +22,8 @@
         "gerencia": "Gestión Ambiental",
         "subgerencia": "Sin asignar",
         "atencion": "Pendiente",
-        "respuesta": "Pendiente"
+        "respuesta": "Pendiente",
+        "motivo_devolucion": "Ninguno"
     },
     {
         "codigo": "E-3",
@@ -33,7 +35,8 @@
         "gerencia": "Gestión Ambiental",
         "subgerencia": "Limpieza Pública",
         "atencion": "Se realizó el recojo de residuos",
-        "respuesta": "Su solicitud fue atendida correctamente"
+        "respuesta": "Su solicitud fue atendida correctamente",
+        "motivo_devolucion": "Ninguno"
     },
     {
         "codigo": "E-4",
@@ -45,18 +48,33 @@
         "gerencia": "Seguridad Ciudadana y Vial",
         "subgerencia": "Sin asignar",
         "atencion": "exitoso",
-        "respuesta": "realizado correctamente"
+        "respuesta": "realizado correctamente",
+        "motivo_devolucion": "Ninguno"
     },
     {
         "codigo": "E-5",
         "dni": "55667788",
         "asunto": "Vereda deteriorada",
-        "descripcion": "La vereda presenta grietas y dificulta el paso peatonal.}",
+        "descripcion": "La vereda presenta grietas y dificulta el paso peatonal.",
         "direccion": "lAS FLORES",
         "estado": "Derivado a gerencia",
         "gerencia": "Desarrollo Urbano",
         "subgerencia": "Sin asignar",
         "atencion": "Pendiente",
-        "respuesta": "Pendiente"
+        "respuesta": "Pendiente",
+        "motivo_devolucion": "Ninguno"
+    },
+    {
+        "codigo": "E-6",
+        "dni": "12345678",
+        "asunto": "basura",
+        "descripcion": "basura",
+        "direccion": "las flores 123",
+        "estado": "Cerrado",
+        "gerencia": "Gestión Ambiental",
+        "subgerencia": "Limpieza Pública",
+        "atencion": "Ya se mando la solicitud",
+        "respuesta": "Ya se reviso su solicitud y gracias quedo aten...",
+        "motivo_devolucion": "Ninguno"
     }
 ]

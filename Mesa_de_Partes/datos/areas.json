@@ -1,0 +1,17 @@
+{
+    "gerencias": [
+        "Gestión Ambiental",
+        "Seguridad Ciudadana y Vial",
+        "Desarrollo Urbano"
+    ],
+    "subgerencias": [
+        {
+            "nombre": "Limpieza Pública",
+            "gerencia": "Gestión Ambiental"
+        },
+        {
+            "nombre": "Parques y Jardines",
+            "gerencia": "Gestión Ambiental"
+        }
+    ]
+}

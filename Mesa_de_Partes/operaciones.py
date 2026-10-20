@@ -3,25 +3,40 @@ from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
 
 
+def buscar_ciudadano(dni):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.dni == dni:
+            return ciudadano
+
+    return None
+
+
+def numero_de_codigo(expediente):
+    # "E-12" -> 12. Si el código no tiene el formato esperado devuelve None.
+
+    partes = expediente.codigo.split("-")
+
+    if len(partes) == 2 and partes[1].isdigit():
+        return int(partes[1])
+
+    return None
+
+
 def mostrar_expediente_completo(expediente):
 
     print("\n=== DATOS DEL CIUDADANO ===")
 
-    encontrado = False
+    ciudadano = buscar_ciudadano(expediente.dni)
 
-    for ciudadano in ciudadanos:
-
-        if ciudadano.dni == expediente.dni:
-
-            print("Nombre:", ciudadano.nombre)
-            print("Apellido:", ciudadano.apellido)
-            print("Correo:", ciudadano.correo)
-
-            encontrado = True
-            break
-
-    if encontrado == False:
+    if ciudadano is None:
         print("Ciudadano no encontrado.")
+
+    else:
+        print("Nombre:", ciudadano.nombre)
+        print("Apellido:", ciudadano.apellido)
+        print("Correo:", ciudadano.correo)
 
     expediente.mostrar_datos()
 
@@ -59,14 +74,10 @@ def registrar_expediente(dni):
 
     for expediente in expedientes:
 
-        partes = expediente.codigo.split("-")
+        numero_actual = numero_de_codigo(expediente)
 
-        if len(partes) == 2 and partes[1].isdigit():
-
-            numero_actual = int(partes[1])
-
-            if numero_actual >= numero:
-                numero = numero_actual + 1
+        if numero_actual is not None and numero_actual >= numero:
+            numero = numero_actual + 1
 
     codigo = "E-" + str(numero)
 
@@ -120,37 +131,23 @@ def ordenar_expedientes():
 
     print("\n=== EXPEDIENTES ORDENADOS ===")
 
-    codigos = []
-
-    for expediente in expedientes:
-
-        partes = expediente.codigo.split("-")
-
-        if len(partes) == 2 and partes[1].isdigit():
-
-            numero = int(partes[1])
-            codigos.append(numero)
-
-    codigos.sort()
-
-    if len(codigos) == 0:
+    if len(expedientes) == 0:
         print("No hay expedientes para ordenar.")
+        return
 
-    for numero in codigos:
+    # Los códigos con formato raro van al final
+    ordenados = sorted(
+        expedientes,
+        key=lambda e: (numero_de_codigo(e) is None, numero_de_codigo(e) or 0)
+    )
 
-        codigo = "E-" + str(numero)
+    for expediente in ordenados:
 
-        for expediente in expedientes:
-
-            if expediente.codigo == codigo:
-
-                print("\nCódigo:", expediente.codigo)
-                print("Asunto:", expediente.asunto)
-                print("Estado:", expediente.estado)
-                print("Gerencia:", expediente.gerencia)
-                print("Subgerencia:", expediente.subgerencia)
-
-                break
+        print("\nCódigo:", expediente.codigo)
+        print("Asunto:", expediente.asunto)
+        print("Estado:", expediente.estado)
+        print("Gerencia:", expediente.gerencia)
+        print("Subgerencia:", expediente.subgerencia)
 
 
 def derivar_expediente():
@@ -186,6 +183,7 @@ def derivar_expediente():
                         expediente.gerencia = gerencias[numero - 1]
                         expediente.subgerencia = "Sin asignar"
                         expediente.estado = "Derivado a gerencia"
+                        expediente.motivo_devolucion = "Ninguno"
 
                         guardar_expedientes()
 

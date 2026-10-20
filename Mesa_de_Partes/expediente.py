@@ -11,6 +11,7 @@ class Expediente:
         self.subgerencia = "Sin asignar"
         self.atencion = "Pendiente"
         self.respuesta = "Pendiente"
+        self.motivo_devolucion = "Ninguno"
 
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
@@ -24,3 +25,6 @@ class Expediente:
         print("Subgerencia:", self.subgerencia)
         print("Atención realizada:", self.atencion)
         print("Respuesta:", self.respuesta)
+
+        if self.estado == "Devuelto a Mesa de Partes":
+            print("Motivo de devolución:", self.motivo_devolucion)
