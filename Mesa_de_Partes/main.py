@@ -94,8 +94,8 @@ def pedir_contrasena():
 
             else:
                 print("ERROR: Las contraseñas no coinciden.")
-                
-                        
+
+
 def registrar_ciudadano():
 
     print("\n=== REGISTRO DE CIUDADANO ===")
@@ -109,8 +109,10 @@ def registrar_ciudadano():
     nombre = pedir_nombre("nombre")
     apellido = pedir_nombre("apellido")
     correo = pedir_correo()
+    usuario = pedir_usuario()
+    contrasena = pedir_contrasena()
 
-    ciudadano = Ciudadano(dni, nombre, apellido, correo)
+    ciudadano = Ciudadano(dni, nombre, apellido, correo, usuario, contrasena)
 
     ciudadanos.append(ciudadano)
     guardar_ciudadanos()
