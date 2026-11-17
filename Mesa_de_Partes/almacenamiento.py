@@ -95,7 +95,9 @@ def cargar_ciudadanos():
             dato["dni"],
             dato["nombre"],
             dato["apellido"],
-            dato["correo"]
+            dato["correo"],
+            dato.get("usuario", ""),
+            dato.get("contrasena", "")
         )
 
         ciudadanos.append(ciudadano)
