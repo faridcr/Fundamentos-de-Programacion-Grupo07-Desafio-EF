@@ -16,6 +16,16 @@ def existe_ciudadano(dni):
     return False
 
 
+def existe_usuario(usuario):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.usuario == usuario:
+            return True
+
+    return False
+
+
 def pedir_dni():
 
     while True:
