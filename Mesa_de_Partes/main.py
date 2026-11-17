@@ -135,14 +135,19 @@ def registrar_ciudadano():
 
 def acceso_ciudadano_registrado():
 
-    dni = pedir_dni()
+    print("\n=== INICIAR SESIÓN ===")
 
-    if existe_ciudadano(dni):
-        print("Bienvenido al sistema.")
-        menu_ciudadano(dni)
+    usuario = input("Ingrese usuario: ").strip()
+    contrasena = input("Ingrese contraseña: ").strip()
+
+    ciudadano = buscar_por_usuario(usuario)
+
+    if usuario != "" and ciudadano is not None and ciudadano.contrasena == contrasena:
+        print("\nBienvenido:", ciudadano.nombre)
+        menu_ciudadano(ciudadano.dni)
 
     else:
-        print("Ciudadano no registrado.")
+        print("Usuario o contraseña incorrectos.")
 
 
 def menu_acceso_ciudadano():
