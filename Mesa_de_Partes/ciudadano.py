@@ -11,3 +11,5 @@ class Ciudadano(Persona):
     def mostrar_datos(self):
         print("=== DATOS DEL CIUDADANO ===")
         super().mostrar_datos()
+        if self.usuario != "":
+            print("Usuario:", self.usuario)
