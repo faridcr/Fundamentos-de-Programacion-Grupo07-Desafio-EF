@@ -3,8 +3,7 @@ from estado import ciudadanos
 from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
-from validaciones import dni_valido, correo_valido, nombre_valido, usuario_valido
-
+from validaciones import dni_valido, correo_valido, nombre_valido, usuario_valido, contrasena_valida
 
 def existe_ciudadano(dni):
 
@@ -77,7 +76,26 @@ def pedir_usuario():
         else:
             return usuario
 
-        
+
+def pedir_contrasena():
+
+    while True:
+
+        contrasena = input("Ingrese contraseña: ").strip()
+
+        if not contrasena_valida(contrasena):
+            print("ERROR: La contraseña debe tener al menos 6 caracteres.")
+
+        else:
+            confirmacion = input("Confirme contraseña: ").strip()
+
+            if contrasena == confirmacion:
+                return contrasena
+
+            else:
+                print("ERROR: Las contraseñas no coinciden.")
+                
+                        
 def registrar_ciudadano():
 
     print("\n=== REGISTRO DE CIUDADANO ===")
