@@ -3,7 +3,7 @@ from estado import ciudadanos
 from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
-from validaciones import dni_valido, correo_valido, nombre_valido
+from validaciones import dni_valido, correo_valido, nombre_valido, usuario_valido
 
 
 def existe_ciudadano(dni):
@@ -62,6 +62,22 @@ def pedir_correo():
         print("Correo incorrecto. Ejemplo: nombre@dominio.com")
 
 
+def pedir_usuario():
+
+    while True:
+
+        usuario = input("Ingrese usuario: ").strip()
+
+        if not usuario_valido(usuario):
+            print("ERROR: El usuario debe tener de 4 a 20 caracteres y no llevar espacios.")
+
+        elif existe_usuario(usuario):
+            print("ERROR: Ese usuario ya está en uso.")
+
+        else:
+            return usuario
+
+        
 def registrar_ciudadano():
 
     print("\n=== REGISTRO DE CIUDADANO ===")
