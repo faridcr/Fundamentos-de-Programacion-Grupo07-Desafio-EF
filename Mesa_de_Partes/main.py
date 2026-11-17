@@ -25,6 +25,16 @@ def existe_usuario(usuario):
     return False
 
 
+def buscar_por_usuario(usuario):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.usuario == usuario:
+            return ciudadano
+
+    return None
+
+
 def pedir_dni():
 
     while True:
