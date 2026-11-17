@@ -25,3 +25,10 @@ def usuario_valido(usuario):
         return False
 
     return True
+
+def contrasena_valida(contrasena):
+
+    if len(contrasena) < 6:
+        return False
+
+    return True
