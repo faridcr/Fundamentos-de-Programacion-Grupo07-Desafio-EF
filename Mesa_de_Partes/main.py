@@ -137,17 +137,26 @@ def acceso_ciudadano_registrado():
 
     print("\n=== INICIAR SESIÓN ===")
 
-    usuario = input("Ingrese usuario: ").strip()
-    contrasena = input("Ingrese contraseña: ").strip()
+    intentos = 0
 
-    ciudadano = buscar_por_usuario(usuario)
+    while intentos < 3:
 
-    if usuario != "" and ciudadano is not None and ciudadano.contrasena == contrasena:
-        print("\nBienvenido:", ciudadano.nombre)
-        menu_ciudadano(ciudadano.dni)
+        usuario = input("Ingrese usuario: ").strip()
+        contrasena = input("Ingrese contraseña: ").strip()
 
-    else:
-        print("Usuario o contraseña incorrectos.")
+        ciudadano = buscar_por_usuario(usuario)
+
+        if usuario != "" and ciudadano is not None and ciudadano.contrasena == contrasena:
+            print("\nBienvenido:", ciudadano.nombre)
+            menu_ciudadano(ciudadano.dni)
+            return
+
+        intentos = intentos + 1
+
+        if intentos < 3:
+            print("Usuario o contraseña incorrectos. Intentos restantes:", 3 - intentos)
+
+    print("Demasiados intentos fallidos. Volviendo al menú de acceso.")
 
 
 def menu_acceso_ciudadano():
