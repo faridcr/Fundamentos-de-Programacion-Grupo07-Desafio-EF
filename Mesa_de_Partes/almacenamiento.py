@@ -112,7 +112,9 @@ def guardar_ciudadanos():
             "dni": ciudadano.dni,
             "nombre": ciudadano.nombre,
             "apellido": ciudadano.apellido,
-            "correo": ciudadano.correo
+            "correo": ciudadano.correo,
+            "usuario": ciudadano.usuario,
+            "contrasena": ciudadano.contrasena
         }
 
         datos.append(dato)
