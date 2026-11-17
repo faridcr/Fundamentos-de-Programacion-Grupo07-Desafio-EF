@@ -15,3 +15,13 @@ def correo_valido(correo):
 def nombre_valido(texto):
     patron = rf"[{LETRAS}]+([ '\-][{LETRAS}]+)*"
     return re.fullmatch(patron, texto) is not None
+
+def usuario_valido(usuario):
+
+    if len(usuario) < 4 or len(usuario) > 20:
+        return False
+
+    if " " in usuario:
+        return False
+
+    return True
