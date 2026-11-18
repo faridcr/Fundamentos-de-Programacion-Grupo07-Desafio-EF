@@ -40,7 +40,25 @@ def mostrar_expediente_completo(expediente):
 
     expediente.mostrar_datos()
 
+def seleccionar_prioridad():
+    while True:
+        print("\n=== SELECCIONAR PRIORIDAD ===")
+        print("1. Normal")
+        print("2. Urgente")
+        print("3. Muy urgente")
 
+        opcion = input("Seleccione una opción: ").strip()
+
+        prioridades = {
+            "1": "Normal",
+            "2": "Urgente",
+            "3": "Muy urgente"
+        }
+
+        if opcion in prioridades:
+            return prioridades[opcion]
+
+        print("ERROR: Seleccione una opción válida.")
 def registrar_expediente(dni):
 
     print("\n=== REGISTRAR SOLICITUD ===")
@@ -81,9 +99,12 @@ def registrar_expediente(dni):
 
     codigo = "E-" + str(numero)
 
+   
     expediente = Expediente(
         codigo, dni, asunto, descripcion, direccion
     )
+
+    expediente.prioridad = seleccionar_prioridad()
 
     expedientes.append(expediente)
     guardar_expedientes()
