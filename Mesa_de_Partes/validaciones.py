@@ -29,3 +29,8 @@ def fecha_formato_valido(texto):
 
     except ValueError:
         return False
+
+def fecha_no_futura(texto):
+    # Se asume que el formato ya fue validado con fecha_formato_valido
+    fecha = datetime.strptime(texto, "%d/%m/%Y").date()
+    return fecha <= date.today()
