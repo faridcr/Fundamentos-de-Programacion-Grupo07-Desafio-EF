@@ -10,3 +10,4 @@ class Ciudadano(Persona):
     def mostrar_datos(self):
         print("=== DATOS DEL CIUDADANO ===")
         super().mostrar_datos()
+        print("Fecha de emisión del DNI:", self.fecha_emision_dni)
