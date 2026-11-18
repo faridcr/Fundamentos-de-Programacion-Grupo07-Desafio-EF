@@ -19,5 +19,13 @@ def nombre_valido(texto):
     return re.fullmatch(patron, texto) is not None
 
 def fecha_formato_valido(texto):
-    # Formato dd/mm/aaaa (dos dígitos, dos dígitos y cuatro dígitos)
-    return re.fullmatch(r"[0-9]{2}/[0-9]{2}/[0-9]{4}", texto) is not None
+    # Formato dd/mm/aaaa y que sea una fecha real (rechaza 31/02/2020, 15/13/2018, etc.)
+    if re.fullmatch(r"[0-9]{2}/[0-9]{2}/[0-9]{4}", texto) is None:
+        return False
+
+    try:
+        datetime.strptime(texto, "%d/%m/%Y")
+        return True
+
+    except ValueError:
+        return False
