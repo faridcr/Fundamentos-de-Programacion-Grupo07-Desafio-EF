@@ -17,3 +17,7 @@ def correo_valido(correo):
 def nombre_valido(texto):
     patron = rf"[{LETRAS}]+([ '\-][{LETRAS}]+)*"
     return re.fullmatch(patron, texto) is not None
+
+def fecha_formato_valido(texto):
+    # Formato dd/mm/aaaa (dos dígitos, dos dígitos y cuatro dígitos)
+    return re.fullmatch(r"[0-9]{2}/[0-9]{2}/[0-9]{4}", texto) is not None
