@@ -57,10 +57,14 @@ def pedir_fecha_emision():
 
         fecha = input("Ingrese fecha de emisión del DNI (dd/mm/aaaa): ").strip()
 
-        if fecha_formato_valido(fecha):
-            return fecha
+        if not fecha_formato_valido(fecha):
+            print("ERROR: Formato incorrecto. Ejemplo: 15/03/2018")
 
-        print("ERROR: Formato incorrecto. Ejemplo: 15/03/2018")
+        elif not fecha_no_futura(fecha):
+            print("ERROR: La fecha de emisión no puede ser posterior a hoy.")
+
+        else:
+            return fecha
 
 
 def registrar_ciudadano():
