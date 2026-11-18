@@ -12,6 +12,7 @@ class Expediente:
         self.atencion = "Pendiente"
         self.respuesta = "Pendiente"
         self.motivo_devolucion = "Ninguno"
+        self.prioridad = "Normal"
 
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
@@ -21,6 +22,7 @@ class Expediente:
         print("Descripción:", self.descripcion)
         print("Dirección:", self.direccion)
         print("Estado:", self.estado)
+        print("Prioridad:", self.prioridad)
         print("Gerencia:", self.gerencia)
         print("Subgerencia:", self.subgerencia)
         print("Atención realizada:", self.atencion)
