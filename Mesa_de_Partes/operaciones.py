@@ -1,7 +1,7 @@
 from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
-
+from datetime import datetime
 
 def buscar_ciudadano(dni):
 
@@ -89,6 +89,7 @@ def registrar_expediente(dni):
     guardar_expedientes()
 
     print("\nSolicitud registrada correctamente.")
+    print("Fecha y hora de registro:", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
     mostrar_expediente_completo(expediente)
 
 
