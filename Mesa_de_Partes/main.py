@@ -51,6 +51,17 @@ def pedir_correo():
 
         print("Correo incorrecto. Ejemplo: nombre@dominio.com")
 
+def pedir_fecha_emision():
+
+    while True:
+
+        fecha = input("Ingrese fecha de emisión del DNI (dd/mm/aaaa): ").strip()
+
+        if fecha_formato_valido(fecha):
+            return fecha
+
+        print("ERROR: Formato incorrecto. Ejemplo: 15/03/2018")
+
 
 def registrar_ciudadano():
 
