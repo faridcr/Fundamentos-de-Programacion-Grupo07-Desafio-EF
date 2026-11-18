@@ -3,7 +3,7 @@ from estado import ciudadanos
 from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
-from validaciones import dni_valido, correo_valido, nombre_valido
+from validaciones import dni_valido, correo_valido, nombre_valido, fecha_formato_valido, fecha_no_futura
 
 
 def existe_ciudadano(dni):
