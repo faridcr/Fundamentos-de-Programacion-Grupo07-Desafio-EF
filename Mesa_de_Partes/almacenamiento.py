@@ -143,7 +143,7 @@ def cargar_expedientes():
         expediente.atencion = dato["atencion"]
         expediente.respuesta = dato["respuesta"]
         expediente.motivo_devolucion = dato.get("motivo_devolucion", "Ninguno")
-
+        expediente.prioridad = dato.get("prioridad", "Normal")
         expedientes.append(expediente)
 
 
@@ -165,7 +165,8 @@ def guardar_expedientes():
             "subgerencia": expediente.subgerencia,
             "atencion": expediente.atencion,
             "respuesta": expediente.respuesta,
-            "motivo_devolucion": expediente.motivo_devolucion
+            "motivo_devolucion": expediente.motivo_devolucion,
+            "prioridad": expediente.prioridad
         }
 
         datos.append(dato)
