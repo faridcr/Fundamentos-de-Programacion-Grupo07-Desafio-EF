@@ -112,7 +112,8 @@ def guardar_ciudadanos():
             "dni": ciudadano.dni,
             "nombre": ciudadano.nombre,
             "apellido": ciudadano.apellido,
-            "correo": ciudadano.correo
+            "correo": ciudadano.correo,
+            "fecha_emision_dni": ciudadano.fecha_emision_dni
         }
 
         datos.append(dato)
