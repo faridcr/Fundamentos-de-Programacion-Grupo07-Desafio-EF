@@ -80,8 +80,9 @@ def registrar_ciudadano():
     nombre = pedir_nombre("nombre")
     apellido = pedir_nombre("apellido")
     correo = pedir_correo()
+    fecha_emision = pedir_fecha_emision()
 
-    ciudadano = Ciudadano(dni, nombre, apellido, correo)
+    ciudadano = Ciudadano(dni, nombre, apellido, correo, fecha_emision)
 
     ciudadanos.append(ciudadano)
     guardar_ciudadanos()
