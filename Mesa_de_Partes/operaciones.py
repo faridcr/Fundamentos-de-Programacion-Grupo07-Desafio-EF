@@ -147,29 +147,54 @@ def buscar_expediente():
     if encontrado == False:
         print("Expediente no encontrado.")
 
-
 def ordenar_expedientes():
-
     print("\n=== EXPEDIENTES ORDENADOS ===")
 
     if len(expedientes) == 0:
         print("No hay expedientes para ordenar.")
         return
 
-    # Los códigos con formato raro van al final
+    # Ordenar por codigo
     ordenados = sorted(
         expedientes,
-        key=lambda e: (numero_de_codigo(e) is None, numero_de_codigo(e) or 0)
+        key=lambda e: (
+            numero_de_codigo(e) is None,
+            numero_de_codigo(e) or 0
+        )
     )
 
     for expediente in ordenados:
-
         print("\nCódigo:", expediente.codigo)
         print("Asunto:", expediente.asunto)
         print("Estado:", expediente.estado)
         print("Gerencia:", expediente.gerencia)
         print("Subgerencia:", expediente.subgerencia)
+        
+def ordenar_expedientes_por_prioridad():
+    print("\n=== EXPEDIENTES POR PRIORIDAD ===")
 
+    if not expedientes:
+        print("No hay expedientes registrados.")
+        return
+
+    niveles = {
+        "Muy urgente": 1,
+        "Urgente": 2,
+        "Normal": 3
+    }
+
+    ordenados = sorted(
+        expedientes,
+        key=lambda e: niveles.get(
+            getattr(e, "prioridad", "Normal"), 3
+        )
+    )
+
+    for expediente in ordenados:
+        print("\nCódigo:", expediente.codigo)
+        print("Asunto:", expediente.asunto)
+        print("Prioridad:", getattr(expediente, "prioridad", "Normal"))
+        print("Estado:", expediente.estado)
 
 def derivar_expediente():
 
