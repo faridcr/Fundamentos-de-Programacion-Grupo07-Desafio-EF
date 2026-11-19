@@ -1,3 +1,10 @@
+from datetime import datetime
+
+FORMATO = "%d/%m/%Y %H:%M:%S"
+
+
+def ahora():
+    return datetime.now().strftime(FORMATO)
 
 class Expediente:
     def __init__(self, codigo, dni, asunto, descripcion, direccion):
@@ -12,7 +19,9 @@ class Expediente:
         self.atencion = "Pendiente"
         self.respuesta = "Pendiente"
         self.motivo_devolucion = "Ninguno"
-
+        self.fecha_registro = ahora()
+        self.fecha_cierre = "Pendiente"
+    
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
         print("Código:", self.codigo)
