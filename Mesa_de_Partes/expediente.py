@@ -6,6 +6,7 @@ FORMATO = "%d/%m/%Y %H:%M:%S"
 def ahora():
     return datetime.now().strftime(FORMATO)
 
+
 class Expediente:
     def __init__(self, codigo, dni, asunto, descripcion, direccion):
         self.codigo = codigo
@@ -21,7 +22,24 @@ class Expediente:
         self.motivo_devolucion = "Ninguno"
         self.fecha_registro = ahora()
         self.fecha_cierre = "Pendiente"
-    
+
+    def tiempo_total(self):
+        if self.fecha_registro == "Sin fecha":
+            return "Sin datos"
+
+        inicio = datetime.strptime(self.fecha_registro, FORMATO)
+
+        if self.fecha_cierre == "Pendiente":
+            fin = datetime.now()
+        else:
+            fin = datetime.strptime(self.fecha_cierre, FORMATO)
+
+        segundos = int((fin - inicio).total_seconds())
+        horas, resto = divmod(segundos, 3600)
+        minutos, seg = divmod(resto, 60)
+
+        return str(horas) + "h " + str(minutos) + "m " + str(seg) + "s"
+
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
         print("Código:", self.codigo)
