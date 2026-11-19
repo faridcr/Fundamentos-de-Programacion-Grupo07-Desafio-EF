@@ -81,7 +81,7 @@ def pedir_usuario():
             print("ERROR: El usuario debe tener de 4 a 20 caracteres y no llevar espacios.")
 
         elif existe_usuario(usuario):
-            print("ERROR: Ese usuario ya está en uso.")
+            print("ERROR: El usuario no está disponible. Intente con otro.")
 
         else:
             return usuario
