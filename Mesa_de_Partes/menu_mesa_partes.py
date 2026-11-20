@@ -1,7 +1,7 @@
 from estado import expedientes
 from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes
 from almacenamiento import guardar_expedientes
-
+from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes, ver_tiempos
 
 def menu_mesa_partes():
 
@@ -14,7 +14,8 @@ def menu_mesa_partes():
         print("4. Buscar expediente por código")
         print("5. Ver expedientes devueltos")
         print("6. Ordenar expedientes por código")
-        print("7. Volver")
+        print("7. Ver tiempos de trámite")
+        print("8. Volver")
 
         opcion = input("Elige una opción: ")
 
@@ -97,7 +98,11 @@ def menu_mesa_partes():
             ordenar_expedientes()
 
         elif opcion == "7":
+            ver_tiempos()
+
+        elif opcion == "8":
             break
 
         else:
             print("ERROR: Opción incorrecta.")
+
