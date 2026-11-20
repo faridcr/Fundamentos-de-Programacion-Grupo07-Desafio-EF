@@ -204,3 +204,18 @@ def derivar_expediente():
 
     if encontrado == False:
         print("Expediente no encontrado.")
+def ver_tiempos():
+
+    print("\n=== TIEMPO DE TRAMITE (SOLO PERSONAL) ===")
+
+    if len(expedientes) == 0:
+        print("No hay expedientes.")
+        return
+
+    for expediente in expedientes:
+
+        print("\nCódigo:", expediente.codigo)
+        print("Estado:", expediente.estado)
+        print("Fecha de registro:", expediente.fecha_registro)
+        print("Fecha de cierre:", expediente.fecha_cierre)
+        print("Tiempo total:", expediente.tiempo_total())
