@@ -3,7 +3,7 @@ from estado import ciudadanos
 from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
-from validaciones import dni_valido, correo_valido, nombre_valido
+from validaciones import dni_valido, correo_valido, nombre_valido, fecha_formato_valido, fecha_no_futura
 
 
 def existe_ciudadano(dni):
@@ -51,6 +51,21 @@ def pedir_correo():
 
         print("Correo incorrecto. Ejemplo: nombre@dominio.com")
 
+def pedir_fecha_emision():
+
+    while True:
+
+        fecha = input("Ingrese fecha de emisión del DNI (dd/mm/aaaa): ").strip()
+
+        if not fecha_formato_valido(fecha):
+            print("ERROR: Formato incorrecto. Ejemplo: 15/03/2018")
+
+        elif not fecha_no_futura(fecha):
+            print("ERROR: La fecha de emisión no puede ser posterior a hoy.")
+
+        else:
+            return fecha
+
 
 def registrar_ciudadano():
 
@@ -65,8 +80,9 @@ def registrar_ciudadano():
     nombre = pedir_nombre("nombre")
     apellido = pedir_nombre("apellido")
     correo = pedir_correo()
+    fecha_emision = pedir_fecha_emision()
 
-    ciudadano = Ciudadano(dni, nombre, apellido, correo)
+    ciudadano = Ciudadano(dni, nombre, apellido, correo, fecha_emision)
 
     ciudadanos.append(ciudadano)
     guardar_ciudadanos()

@@ -1,5 +1,7 @@
 import re
 
+from datetime import datetime, date
+
 LETRAS = "A-Za-zÁÉÍÓÚáéíóúÑñÜü"
 
 
@@ -15,3 +17,20 @@ def correo_valido(correo):
 def nombre_valido(texto):
     patron = rf"[{LETRAS}]+([ '\-][{LETRAS}]+)*"
     return re.fullmatch(patron, texto) is not None
+
+def fecha_formato_valido(texto):
+    # Formato dd/mm/aaaa y que sea una fecha real (rechaza 31/02/2020, 15/13/2018, etc.)
+    if re.fullmatch(r"[0-9]{2}/[0-9]{2}/[0-9]{4}", texto) is None:
+        return False
+
+    try:
+        datetime.strptime(texto, "%d/%m/%Y")
+        return True
+
+    except ValueError:
+        return False
+
+def fecha_no_futura(texto):
+    # Se asume que el formato ya fue validado con fecha_formato_valido
+    fecha = datetime.strptime(texto, "%d/%m/%Y").date()
+    return fecha <= date.today()
