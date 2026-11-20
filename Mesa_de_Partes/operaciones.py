@@ -37,6 +37,7 @@ def mostrar_expediente_completo(expediente):
         print("Nombre:", ciudadano.nombre)
         print("Apellido:", ciudadano.apellido)
         print("Correo:", ciudadano.correo)
+        print("Fecha de emisión del DNI:", ciudadano.fecha_emision_dni)
 
     expediente.mostrar_datos()
 
