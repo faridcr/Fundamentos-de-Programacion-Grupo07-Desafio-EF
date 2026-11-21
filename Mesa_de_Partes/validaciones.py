@@ -18,6 +18,24 @@ def nombre_valido(texto):
     patron = rf"[{LETRAS}]+([ '\-][{LETRAS}]+)*"
     return re.fullmatch(patron, texto) is not None
 
+def usuario_valido(usuario):
+
+    if len(usuario) < 4 or len(usuario) > 20:
+        return False
+
+    if " " in usuario:
+        return False
+
+    return True
+
+def contrasena_valida(contrasena):
+
+    if len(contrasena) < 6:
+        return False
+
+    return True
+
+
 def fecha_formato_valido(texto):
     # Formato dd/mm/aaaa y que sea una fecha real (rechaza 31/02/2020, 15/13/2018, etc.)
     if re.fullmatch(r"[0-9]{2}/[0-9]{2}/[0-9]{4}", texto) is None:

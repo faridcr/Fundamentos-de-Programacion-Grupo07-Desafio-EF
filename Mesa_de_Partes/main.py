@@ -3,8 +3,7 @@ from estado import ciudadanos
 from almacenamiento import cargar_todo, guardar_ciudadanos
 from menu_ciudadano import menu_ciudadano
 from acceso import iniciar_sesion
-from validaciones import dni_valido, correo_valido, nombre_valido, fecha_formato_valido, fecha_no_futura
-
+from validaciones import dni_valido, correo_valido, nombre_valido, usuario_valido, contrasena_valida, fecha_formato_valido, fecha_no_futura
 
 def existe_ciudadano(dni):
 
@@ -14,6 +13,26 @@ def existe_ciudadano(dni):
             return True
 
     return False
+
+
+def existe_usuario(usuario):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.usuario == usuario:
+            return True
+
+    return False
+
+
+def buscar_por_usuario(usuario):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.usuario == usuario:
+            return ciudadano
+
+    return None
 
 
 def pedir_dni():
@@ -67,6 +86,41 @@ def pedir_fecha_emision():
             return fecha
 
 
+def pedir_usuario():
+
+    while True:
+
+        usuario = input("Ingrese usuario: ").strip()
+
+        if not usuario_valido(usuario):
+            print("ERROR: El usuario debe tener de 4 a 20 caracteres y no llevar espacios.")
+
+        elif existe_usuario(usuario):
+            print("ERROR: El usuario no está disponible. Intente con otro.")
+
+        else:
+            return usuario
+
+
+def pedir_contrasena():
+
+    while True:
+
+        contrasena = input("Ingrese contraseña: ").strip()
+
+        if not contrasena_valida(contrasena):
+            print("ERROR: La contraseña debe tener al menos 6 caracteres.")
+
+        else:
+            confirmacion = input("Confirme contraseña: ").strip()
+
+            if contrasena == confirmacion:
+                return contrasena
+
+            else:
+                print("ERROR: Las contraseñas no coinciden.")
+
+
 def registrar_ciudadano():
 
     print("\n=== REGISTRO DE CIUDADANO ===")
@@ -80,9 +134,11 @@ def registrar_ciudadano():
     nombre = pedir_nombre("nombre")
     apellido = pedir_nombre("apellido")
     correo = pedir_correo()
+    usuario = pedir_usuario()
+    contrasena = pedir_contrasena()
     fecha_emision = pedir_fecha_emision()
 
-    ciudadano = Ciudadano(dni, nombre, apellido, correo, fecha_emision)
+    ciudadano = Ciudadano(dni, nombre, apellido, correo, usuario, contrasena, fecha_emision)
 
     ciudadanos.append(ciudadano)
     guardar_ciudadanos()
@@ -95,14 +151,28 @@ def registrar_ciudadano():
 
 def acceso_ciudadano_registrado():
 
-    dni = pedir_dni()
+    print("\n=== INICIAR SESIÓN ===")
 
-    if existe_ciudadano(dni):
-        print("Bienvenido al sistema.")
-        menu_ciudadano(dni)
+    intentos = 0
 
-    else:
-        print("Ciudadano no registrado.")
+    while intentos < 3:
+
+        usuario = input("Ingrese usuario: ").strip()
+        contrasena = input("Ingrese contraseña: ").strip()
+
+        ciudadano = buscar_por_usuario(usuario)
+
+        if usuario != "" and ciudadano is not None and ciudadano.contrasena == contrasena:
+            print("\nBienvenido:", ciudadano.nombre)
+            menu_ciudadano(ciudadano.dni)
+            return
+
+        intentos = intentos + 1
+
+        if intentos < 3:
+            print("Usuario o contraseña incorrectos. Intentos restantes:", 3 - intentos)
+
+    print("Demasiados intentos fallidos. Volviendo al menú de acceso.")
 
 
 def menu_acceso_ciudadano():

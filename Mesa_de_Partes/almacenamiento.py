@@ -96,6 +96,8 @@ def cargar_ciudadanos():
             dato["nombre"],
             dato["apellido"],
             dato["correo"],
+            dato.get("usuario", ""),
+            dato.get("contrasena", ""),
             dato.get("fecha_emision_dni", "No registrada")
         )
 
@@ -114,6 +116,8 @@ def guardar_ciudadanos():
             "nombre": ciudadano.nombre,
             "apellido": ciudadano.apellido,
             "correo": ciudadano.correo,
+            "usuario": ciudadano.usuario,
+            "contrasena": ciudadano.contrasena,
             "fecha_emision_dni": ciudadano.fecha_emision_dni
         }
 
