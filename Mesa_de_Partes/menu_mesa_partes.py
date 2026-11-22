@@ -1,5 +1,5 @@
 from estado import expedientes
-from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes
+from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes, ordenar_expedientes_por_prioridad
 from almacenamiento import guardar_expedientes
 
 
@@ -14,7 +14,8 @@ def menu_mesa_partes():
         print("4. Buscar expediente por código")
         print("5. Ver expedientes devueltos")
         print("6. Ordenar expedientes por código")
-        print("7. Volver")
+        print("7. Ordenar expedientes por prioridad")
+        print("8. Volver")
 
         opcion = input("Elige una opción: ")
 
@@ -94,9 +95,12 @@ def menu_mesa_partes():
                 print("No hay expedientes devueltos.")
 
         elif opcion == "6":
-            ordenar_expedientes()
+                ordenar_expedientes()
 
         elif opcion == "7":
+            ordenar_expedientes_por_prioridad()
+
+        elif opcion == "8":
             break
 
         else:
