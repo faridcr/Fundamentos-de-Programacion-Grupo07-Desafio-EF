@@ -95,7 +95,10 @@ def cargar_ciudadanos():
             dato["dni"],
             dato["nombre"],
             dato["apellido"],
-            dato["correo"]
+            dato["correo"],
+            dato.get("usuario", ""),
+            dato.get("contrasena", ""),
+            dato.get("fecha_emision_dni", "No registrada")
         )
 
         ciudadanos.append(ciudadano)
@@ -112,7 +115,10 @@ def guardar_ciudadanos():
             "dni": ciudadano.dni,
             "nombre": ciudadano.nombre,
             "apellido": ciudadano.apellido,
-            "correo": ciudadano.correo
+            "correo": ciudadano.correo,
+            "usuario": ciudadano.usuario,
+            "contrasena": ciudadano.contrasena,
+            "fecha_emision_dni": ciudadano.fecha_emision_dni
         }
 
         datos.append(dato)
@@ -145,6 +151,7 @@ def cargar_expedientes():
         expediente.motivo_devolucion = dato.get("motivo_devolucion", "Ninguno")
         expediente.fecha_registro = dato.get("fecha_registro", "Sin fecha")
         expediente.fecha_cierre = dato.get("fecha_cierre", "Pendiente")
+        expediente.prioridad = dato.get("prioridad", "Normal")
         expedientes.append(expediente)
 
 
@@ -168,7 +175,8 @@ def guardar_expedientes():
             "respuesta": expediente.respuesta,
             "motivo_devolucion": expediente.motivo_devolucion,
             "fecha_registro": expediente.fecha_registro,
-            "fecha_cierre": expediente.fecha_cierre  
+            "fecha_cierre": expediente.fecha_cierre,
+            "prioridad": expediente.prioridad
         }
 
         datos.append(dato)

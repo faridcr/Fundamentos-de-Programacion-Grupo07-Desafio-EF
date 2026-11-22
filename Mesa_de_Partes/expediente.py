@@ -22,6 +22,7 @@ class Expediente:
         self.motivo_devolucion = "Ninguno"
         self.fecha_registro = ahora()
         self.fecha_cierre = "Pendiente"
+        self.prioridad = "Normal"
 
     def tiempo_total(self):
         if self.fecha_registro == "Sin fecha":
@@ -40,6 +41,7 @@ class Expediente:
 
         return str(horas) + "h " + str(minutos) + "m " + str(seg) + "s"
 
+
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
         print("Código:", self.codigo)
@@ -48,6 +50,7 @@ class Expediente:
         print("Descripción:", self.descripcion)
         print("Dirección:", self.direccion)
         print("Estado:", self.estado)
+        print("Prioridad:", self.prioridad)
         print("Gerencia:", self.gerencia)
         print("Subgerencia:", self.subgerencia)
         print("Atención realizada:", self.atencion)
