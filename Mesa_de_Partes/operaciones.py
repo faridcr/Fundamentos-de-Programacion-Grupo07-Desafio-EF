@@ -220,3 +220,70 @@ def derivar_expediente():
 
     if encontrado == False:
         print("Expediente no encontrado.")
+        def gestionar_expediente():
+            print("\n=== GESTIONAR EXPEDIENTE ===")
+
+            codigo = input("Ingrese el código del expediente: ").strip().upper()
+
+        expediente_encontrado = None
+
+        for expediente in expedientes:
+         if expediente.codigo == codigo:
+            expediente_encontrado = expediente
+            break
+
+    if expediente_encontrado is None:
+        print("ERROR: Expediente no encontrado.")
+        return
+
+    print("\n=== DATOS DEL EXPEDIENTE ===")
+    expediente_encontrado.mostrar_datos()
+
+    print("\n=== ACTUALIZAR GESTIÓN ===")
+    print("1. En proceso")
+    print("2. Atendido")
+    print("3. Devuelto a Mesa de Partes")
+
+    opcion = input("Seleccione una opción: ")
+
+    estados = {
+        "1": "En proceso",
+        "2": "Atendido",
+        "3": "Devuelto a Mesa de Partes"
+    }
+
+    if opcion not in estados:
+        print("Opción inválida.")
+        return
+
+    responsable = input("Ingrese el nombre del responsable: ").strip()
+
+    if not responsable:
+        print("El responsable no puede estar vacío.")
+        return
+
+    nuevo_estado = estados[opcion]
+
+    expediente_encontrado.estado = nuevo_estado
+    expediente_encontrado.atencion = input(
+        "Ingrese la atención realizada: "
+    ).strip()
+
+    expediente_encontrado.respuesta = input(
+        "Ingrese la respuesta del expediente: "
+    ).strip()
+
+    if nuevo_estado == "Devuelto a Mesa de Partes":
+        expediente_encontrado.motivo_devolucion = input(
+            "Ingrese el motivo de devolución: "
+        ).strip()
+
+    expediente_encontrado.registrar_movimiento(
+        f"Estado actualizado a: {nuevo_estado}",
+        responsable
+    )
+
+    guardar_expedientes()
+
+    print("\nExpediente actualizado correctamente.")
+    expediente_encontrado.mostrar_datos()
