@@ -13,6 +13,10 @@ class Expediente:
         self.respuesta = "Pendiente"
         self.motivo_devolucion = "Ninguno"
         self.prioridad = "Normal"
+        self.prioridad_solicitada = None
+        self.justificacion_prioridad = ""
+        self.fecha_verificacion_prioridad = None
+        self.fecha_limite = None
 
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
