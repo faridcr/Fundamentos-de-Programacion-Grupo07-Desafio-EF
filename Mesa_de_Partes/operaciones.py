@@ -14,14 +14,30 @@ def buscar_ciudadano(dni):
 
 
 def numero_de_codigo(expediente):
-    # "E-12" -> 12. Si el código no tiene el formato esperado devuelve None.
+    if expediente is None:
+        return None
 
-    partes = expediente.codigo.split("-")
+    codigo = getattr(expediente, "codigo", None)
 
-    if len(partes) == 2 and partes[1].isdigit():
-        return int(partes[1])
+    if not isinstance(codigo, str):
+        return None
 
-    return None
+    codigo = codigo.strip().upper()
+    partes = codigo.split("-")
+
+    if len(partes) != 2:
+        return None
+
+    if partes[0] != "E" or not partes[1].isdigit():
+        return None
+
+    numero = int(partes[1])
+
+    if numero <= 0:
+        return None
+
+    return numero
+
 
 
 def mostrar_expediente_completo(expediente):
