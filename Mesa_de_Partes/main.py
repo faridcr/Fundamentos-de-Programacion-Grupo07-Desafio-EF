@@ -77,6 +77,15 @@ def crear_credenciales():
             print("Demasiados intentos. Intente más tarde.")
             return
 
+    usuario = pedir_usuario()
+    contrasena = pedir_contrasena()
+
+    ciudadano.usuario = usuario
+    ciudadano.contrasena = contrasena
+    guardar_ciudadanos()
+
+    print("\nUsuario y contraseña creados correctamente. Ya puede iniciar sesión.")
+
 
 def pedir_dni():
 
