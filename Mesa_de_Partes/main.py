@@ -61,6 +61,23 @@ def crear_credenciales():
         return
 
 
+        intentos = 0
+
+    while True:
+
+        correo = input("Ingrese el correo con el que se registró: ").strip().lower()
+
+        if correo == ciudadano.correo.lower():
+            break
+
+        intentos += 1
+        print("ERROR: El correo no coincide con el registrado.")
+
+        if intentos == 3:
+            print("Demasiados intentos. Intente más tarde.")
+            return
+
+
 def pedir_dni():
 
     while True:
