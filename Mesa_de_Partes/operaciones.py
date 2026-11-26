@@ -1,5 +1,5 @@
-from expediente import Expediente
-from estado import ciudadanos, expedientes, gerencias
+from expediente import Expediente, ahora
+from estado import ciudadanos, expedientes, gerencias, ESTADO_CANCELADO
 from almacenamiento import guardar_expedientes
 from datetime import datetime
 
@@ -360,4 +360,62 @@ def editar_solicitud(dni):
     guardar_expedientes()
 
     print("\nSolicitud actualizada correctamente.")
+    mostrar_expediente_completo(seleccionado)
+
+
+def pedir_confirmacion(mensaje):
+
+    while True:
+
+        respuesta = input(mensaje).strip().upper()
+
+        if respuesta == "S" or respuesta == "N":
+            return respuesta
+
+        print("ERROR: Responda S o N.")
+
+
+def cancelar_solicitud(dni):
+
+    print("\n=== CANCELAR SOLICITUD ===")
+
+    pendientes = solicitudes_pendientes(dni)
+
+    if len(pendientes) == 0:
+        print("No tienes solicitudes pendientes de recepción para cancelar.")
+        return
+
+    print("Solicitudes que puedes cancelar:")
+
+    for expediente in pendientes:
+        print("-", expediente.codigo, ":", expediente.asunto)
+
+    seleccionado = None
+
+    while seleccionado is None:
+
+        codigo = input("Ingrese el código de la solicitud (0 para volver): ").strip().upper()
+
+        if codigo == "0":
+            return
+
+        for expediente in pendientes:
+
+            if expediente.codigo == codigo:
+                seleccionado = expediente
+
+        if seleccionado is None:
+            print("ERROR: El código no existe o la solicitud no se puede cancelar.")
+
+    respuesta = pedir_confirmacion("¿Seguro que desea cancelar la solicitud " + seleccionado.codigo + "? (S/N): ")
+
+    if respuesta == "N":
+        print("Cancelación anulada. La solicitud sigue pendiente.")
+        return
+
+    seleccionado.estado = ESTADO_CANCELADO
+    seleccionado.fecha_cierre = ahora()
+    guardar_expedientes()
+
+    print("\nSolicitud cancelada correctamente.")
     mostrar_expediente_completo(seleccionado)
