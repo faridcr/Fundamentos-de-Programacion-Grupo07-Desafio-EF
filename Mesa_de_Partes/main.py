@@ -59,9 +59,8 @@ def crear_credenciales():
     if ciudadano.usuario != "" and ciudadano.contrasena != "":
         print("Este ciudadano ya tiene usuario y contraseña.")
         return
-
-
-        intentos = 0
+    
+    intentos = 0
 
     while True:
 
