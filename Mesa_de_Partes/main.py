@@ -35,6 +35,16 @@ def buscar_por_usuario(usuario):
     return None
 
 
+def buscar_por_dni(dni):
+
+    for ciudadano in ciudadanos:
+
+        if ciudadano.dni == dni:
+            return ciudadano
+
+    return None
+
+
 def pedir_dni():
 
     while True:
