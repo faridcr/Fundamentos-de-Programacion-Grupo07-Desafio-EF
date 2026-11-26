@@ -231,7 +231,8 @@ def menu_acceso_ciudadano():
     print("\n=== ACCESO CIUDADANO ===")
     print("1. Registrar nuevo ciudadano")
     print("2. Ya estoy registrado")
-    print("3. Volver")
+    print("3. Ya estaba registrado: crear mi usuario y contraseña")
+    print("4. Volver")
 
     opcion = input("Elige una opción: ")
 
@@ -242,6 +243,9 @@ def menu_acceso_ciudadano():
         acceso_ciudadano_registrado()
 
     elif opcion == "3":
+        crear_credenciales()
+
+    elif opcion == "4":
         print("Volviendo al menú principal.")
 
     else:
