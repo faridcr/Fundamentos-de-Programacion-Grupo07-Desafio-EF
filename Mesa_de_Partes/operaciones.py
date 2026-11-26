@@ -282,3 +282,16 @@ def ver_tiempos():
         print("Fecha de registro:", expediente.fecha_registro)
         print("Fecha de cierre:", expediente.fecha_cierre)
         print("Tiempo total:", expediente.tiempo_total())
+
+
+def solicitudes_pendientes(dni):
+
+    # Solicitudes del ciudadano que todavía no fueron recibidas
+    pendientes = []
+
+    for expediente in expedientes:
+
+        if expediente.dni == dni and expediente.estado == "Pendiente de recepción":
+            pendientes.append(expediente)
+
+    return pendientes
