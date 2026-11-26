@@ -369,10 +369,13 @@ def pedir_confirmacion(mensaje):
 
         respuesta = input(mensaje).strip().upper()
 
-        if respuesta == "S" or respuesta == "N":
-            return respuesta
+        if respuesta == "S" or respuesta == "SI" or respuesta == "SÍ":
+            return "S"
 
-        print("ERROR: Responda S o N.")
+        if respuesta == "N" or respuesta == "NO":
+            return "N"
+
+        print("ERROR: Responda SI o NO.")
 
 
 def cancelar_solicitud(dni):
@@ -407,7 +410,7 @@ def cancelar_solicitud(dni):
         if seleccionado is None:
             print("ERROR: El código no existe o la solicitud no se puede cancelar.")
 
-    respuesta = pedir_confirmacion("¿Seguro que desea cancelar la solicitud " + seleccionado.codigo + "? (S/N): ")
+    respuesta = pedir_confirmacion("¿Seguro que desea cancelar la solicitud " + seleccionado.codigo + "? (SI/NO): ")
 
     if respuesta == "N":
         print("Cancelación anulada. La solicitud sigue pendiente.")
