@@ -1,4 +1,4 @@
-from operaciones import registrar_expediente, consultar_expedientes, editar_solicitud
+from operaciones import cancelar_solicitud, registrar_expediente, consultar_expedientes, editar_solicitud
 
 
 def menu_ciudadano(dni):
@@ -9,7 +9,8 @@ def menu_ciudadano(dni):
         print("1. Registrar solicitud")
         print("2. Consultar mis expedientes")
         print("3. Editar una solicitud")
-        print("4. Volver")
+        print("4. Cancelar una solicitud")
+        print("5. Volver")
 
         opcion = input("Elige una opción: ")
 
@@ -23,6 +24,9 @@ def menu_ciudadano(dni):
             editar_solicitud(dni)
 
         elif opcion == "4":
+            cancelar_solicitud(dni)
+
+        elif opcion == "5":
             break
 
         else:
