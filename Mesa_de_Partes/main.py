@@ -45,6 +45,22 @@ def buscar_por_dni(dni):
     return None
 
 
+def crear_credenciales():
+
+    print("\n=== CREAR USUARIO Y CONTRASEÑA ===")
+
+    dni = pedir_dni()
+    ciudadano = buscar_por_dni(dni)
+
+    if ciudadano is None:
+        print("ERROR: Ese DNI no está registrado.")
+        return
+
+    if ciudadano.usuario != "" and ciudadano.contrasena != "":
+        print("Este ciudadano ya tiene usuario y contraseña.")
+        return
+
+
 def pedir_dni():
 
     while True:
