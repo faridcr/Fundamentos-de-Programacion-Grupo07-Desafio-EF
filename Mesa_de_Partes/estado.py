@@ -4,3 +4,7 @@ expedientes = []
 trabajadores = []
 subgerencias = []
 gerencias = []
+
+
+# ESTADOS
+ESTADO_CANCELADO = "Cancelado"
