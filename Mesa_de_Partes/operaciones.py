@@ -295,3 +295,69 @@ def solicitudes_pendientes(dni):
             pendientes.append(expediente)
 
     return pendientes
+
+
+def pedir_texto_no_vacio(mensaje):
+
+    while True:
+
+        texto = input(mensaje).strip()
+
+        if texto != "":
+            return texto
+
+        print("ERROR: Este dato no puede estar vacío.")
+
+
+def editar_solicitud(dni):
+
+    print("\n=== EDITAR SOLICITUD ===")
+
+    pendientes = solicitudes_pendientes(dni)
+
+    if len(pendientes) == 0:
+        print("No tienes solicitudes pendientes de recepción para editar.")
+        return
+
+    print("Solicitudes que puedes editar:")
+
+    for expediente in pendientes:
+        print("-", expediente.codigo, ":", expediente.asunto)
+
+    codigo = input("Ingrese el código de la solicitud: ").strip().upper()
+
+    seleccionado = None
+
+    for expediente in pendientes:
+
+        if expediente.codigo == codigo:
+            seleccionado = expediente
+
+    if seleccionado is None:
+        print("ERROR: El código no existe o la solicitud no se puede editar.")
+        return
+
+    print("\n¿Qué dato desea cambiar?")
+    print("1. Asunto")
+    print("2. Descripción")
+    print("3. Dirección")
+
+    opcion = input("Elige una opción: ").strip()
+
+    if opcion == "1":
+        seleccionado.asunto = pedir_texto_no_vacio("Nuevo asunto: ")
+
+    elif opcion == "2":
+        seleccionado.descripcion = pedir_texto_no_vacio("Nueva descripción: ")
+
+    elif opcion == "3":
+        seleccionado.direccion = pedir_texto_no_vacio("Nueva dirección: ")
+
+    else:
+        print("ERROR: Opción incorrecta.")
+        return
+
+    guardar_expedientes()
+
+    print("\nSolicitud actualizada correctamente.")
+    mostrar_expediente_completo(seleccionado)
