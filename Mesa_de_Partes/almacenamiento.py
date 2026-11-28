@@ -154,6 +154,7 @@ def cargar_expedientes():
         expediente.prioridad = dato.get("prioridad", "Normal")
         expediente.calificacion = dato.get("calificacion", "Pendiente")
         expediente.comentario_mejora = dato.get("comentario_mejora", "Ninguno")
+        expediente.historial = dato.get("historial", [])
         expedientes.append(expediente)
 
 
