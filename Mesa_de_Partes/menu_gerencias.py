@@ -32,6 +32,31 @@ def ver_expedientes(campo, area):
     if encontrado == False:
         print("No hay expedientes asignados.")
 
+def ver_calificaciones(campo, area):
+    # campo es "gerencia" o "subgerencia"
+
+    print("\n=== CALIFICACIONES DE", area.upper(), "===")
+
+    notas = []
+
+    for expediente in expedientes:
+
+        if getattr(expediente, campo) == area and expediente.calificacion != "Pendiente":
+
+            print(expediente.codigo, "-", expediente.asunto)
+            print("   Calificación:", expediente.calificacion, "/ 10")
+            print("   Comentario de mejora:", expediente.comentario_mejora)
+
+            notas.append(expediente.calificacion)
+
+    if len(notas) == 0:
+        print("Aún no hay expedientes calificados.")
+        return
+
+    promedio = sum(notas) / len(notas)
+
+    print("\nExpedientes calificados:", len(notas))
+    print("Promedio:", round(promedio, 1), "/ 10")
 
 def recibir(expediente, estado_pendiente, estado_recibido):
 
