@@ -2,6 +2,7 @@ from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
 from datetime import datetime
+from hoja_ruta import registrar_paso
 
 def buscar_ciudadano(dni):
 
@@ -120,7 +121,8 @@ def registrar_expediente(dni):
     expediente = Expediente(
         codigo, dni, asunto, descripcion, direccion
     )
-
+    registrar_paso(expediente, "Solicitud registrada por el ciudadano")
+    
     expediente.prioridad = seleccionar_prioridad()
 
     expedientes.append(expediente)
