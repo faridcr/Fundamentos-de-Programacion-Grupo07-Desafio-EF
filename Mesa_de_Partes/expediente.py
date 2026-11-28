@@ -23,6 +23,8 @@ class Expediente:
         self.fecha_registro = ahora()
         self.fecha_cierre = "Pendiente"
         self.prioridad = "Normal"
+        self.calificacion = "Pendiente"
+        self.comentario_mejora = "Ninguno"
 
     def tiempo_total(self):
         if self.fecha_registro == "Sin fecha":
