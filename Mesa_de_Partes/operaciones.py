@@ -397,3 +397,16 @@ def calificar_atencion(dni):
         print(expediente.codigo, "-", expediente.asunto)
 
     codigo = input("Ingrese el código del expediente a calificar: ").strip().upper()
+    
+    for expediente in pendientes:
+
+        if expediente.codigo == codigo:
+
+            expediente.calificacion = pedir_calificacion()
+            expediente.comentario_mejora = pedir_comentario_mejora()
+            guardar_expedientes()
+
+            print("Gracias por calificar la atención.")
+            return
+
+    print("Código incorrecto: ese expediente no está en la lista.")
