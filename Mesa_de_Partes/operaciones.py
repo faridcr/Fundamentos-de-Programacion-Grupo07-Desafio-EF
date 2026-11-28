@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
-
+from datetime import datetime
 
 def buscar_ciudadano(dni):
 
@@ -16,14 +16,30 @@ def buscar_ciudadano(dni):
 
 
 def numero_de_codigo(expediente):
-    # "E-12" -> 12. Si el código no tiene el formato esperado devuelve None.
+    if expediente is None:
+        return None
 
-    partes = expediente.codigo.split("-")
+    codigo = getattr(expediente, "codigo", None)
 
-    if len(partes) == 2 and partes[1].isdigit():
-        return int(partes[1])
+    if not isinstance(codigo, str):
+        return None
 
-    return None
+    codigo = codigo.strip().upper()
+    partes = codigo.split("-")
+
+    if len(partes) != 2:
+        return None
+
+    if partes[0] != "E" or not partes[1].isdigit():
+        return None
+
+    numero = int(partes[1])
+
+    if numero <= 0:
+        return None
+
+    return numero
+
 
 
 def mostrar_expediente_completo(expediente):
@@ -188,6 +204,7 @@ def registrar_expediente(dni):
     guardar_expedientes()
 
     print("\nSolicitud registrada correctamente.")
+    print("Fecha y hora de registro:", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
     mostrar_expediente_completo(expediente)
 
 
@@ -327,3 +344,85 @@ def derivar_expediente():
 
     if encontrado == False:
         print("Expediente no encontrado.")
+        def gestionar_expediente():
+            print("\n=== GESTIONAR EXPEDIENTE ===")
+
+            codigo = input("Ingrese el código del expediente: ").strip().upper()
+
+        expediente_encontrado = None
+
+        for expediente in expedientes:
+         if expediente.codigo == codigo:
+            expediente_encontrado = expediente
+            break
+
+    if expediente_encontrado is None:
+        print("ERROR: Expediente no encontrado.")
+        return
+
+    print("\n=== DATOS DEL EXPEDIENTE ===")
+    expediente_encontrado.mostrar_datos()
+
+    print("\n=== ACTUALIZAR GESTIÓN ===")
+    print("1. En proceso")
+    print("2. Atendido")
+    print("3. Devuelto a Mesa de Partes")
+
+    opcion = input("Seleccione una opción: ")
+
+    estados = {
+        "1": "En proceso",
+        "2": "Atendido",
+        "3": "Devuelto a Mesa de Partes"
+    }
+
+    if opcion not in estados:
+        print("Opción inválida.")
+        return
+
+    responsable = input("Ingrese el nombre del responsable: ").strip()
+
+    if not responsable:
+        print("El responsable no puede estar vacío.")
+        return
+
+    nuevo_estado = estados[opcion]
+
+    expediente_encontrado.estado = nuevo_estado
+    expediente_encontrado.atencion = input(
+        "Ingrese la atención realizada: "
+    ).strip()
+
+    expediente_encontrado.respuesta = input(
+        "Ingrese la respuesta del expediente: "
+    ).strip()
+
+    if nuevo_estado == "Devuelto a Mesa de Partes":
+        expediente_encontrado.motivo_devolucion = input(
+            "Ingrese el motivo de devolución: "
+        ).strip()
+
+    expediente_encontrado.registrar_movimiento(
+        f"Estado actualizado a: {nuevo_estado}",
+        responsable
+    )
+
+    guardar_expedientes()
+
+    print("\nExpediente actualizado correctamente.")
+    expediente_encontrado.mostrar_datos()
+def ver_tiempos():
+
+    print("\n=== TIEMPO DE TRAMITE (SOLO PERSONAL) ===")
+
+    if len(expedientes) == 0:
+        print("No hay expedientes.")
+        return
+
+    for expediente in expedientes:
+
+        print("\nCódigo:", expediente.codigo)
+        print("Estado:", expediente.estado)
+        print("Fecha de registro:", expediente.fecha_registro)
+        print("Fecha de cierre:", expediente.fecha_cierre)
+        print("Tiempo total:", expediente.tiempo_total())
