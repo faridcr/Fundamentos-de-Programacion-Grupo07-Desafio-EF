@@ -60,3 +60,8 @@ class Expediente:
 
         if self.estado == "Devuelto a Mesa de Partes":
             print("Motivo de devolución:", self.motivo_devolucion)
+
+        
+        if self.calificacion != "Pendiente":
+            print("Calificación de la atención:", self.calificacion, "/ 10")
+            print("Comentario de mejora:", self.comentario_mejora)
