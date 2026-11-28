@@ -364,3 +364,15 @@ def pedir_calificacion():
 
         else:
             return int(texto)
+
+
+def pedir_comentario_mejora():
+
+    while True:
+
+        comentario = input("¿Qué podríamos mejorar en la atención?: ").strip()
+
+        if comentario != "":
+            return comentario
+
+        print("ERROR: El comentario no puede estar vacío.")
