@@ -1,6 +1,7 @@
 from estado import expedientes, subgerencias
 from operaciones import mostrar_expediente_completo
 from almacenamiento import guardar_expedientes
+from hoja_ruta import registrar_paso
 from expediente import ahora
 
 # ---------------------------------------------------------------
@@ -65,6 +66,8 @@ def recibir(expediente, estado_pendiente, estado_recibido):
         expediente.estado = estado_recibido
         guardar_expedientes()
 
+        registrar_paso(expediente, "Expediente recibido")
+
         print("Expediente recibido correctamente.")
 
     else:
@@ -87,6 +90,8 @@ def devolver(expediente, estados_permitidos):
     expediente.gerencia = "Sin asignar"
     expediente.subgerencia = "Sin asignar"
     expediente.motivo_devolucion = motivo
+
+    registrar_paso(expediente, "Motivo: " + motivo)
 
     guardar_expedientes()
 
@@ -170,6 +175,7 @@ def derivar_a_subgerencia(expediente, propias):
 
     expediente.subgerencia = propias[numero - 1].nombre
     expediente.estado = "Derivado a subgerencia"
+    registrar_paso(expediente, "Derivado a " + expediente.subgerencia)
 
     guardar_expedientes()
 
