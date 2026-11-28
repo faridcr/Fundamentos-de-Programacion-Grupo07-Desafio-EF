@@ -349,3 +349,18 @@ def ver_tiempos():
         print("Fecha de registro:", expediente.fecha_registro)
         print("Fecha de cierre:", expediente.fecha_cierre)
         print("Tiempo total:", expediente.tiempo_total())
+
+def pedir_calificacion():
+
+    while True:
+
+        texto = input("Califique la atención recibida (1 = muy mala, 10 = excelente): ").strip()
+
+        if not texto.isdigit():
+            print("ERROR: Ingrese solo números.")
+
+        elif int(texto) < 1 or int(texto) > 10:
+            print("ERROR: La calificación debe estar entre 1 y 10.")
+
+        else:
+            return int(texto)
