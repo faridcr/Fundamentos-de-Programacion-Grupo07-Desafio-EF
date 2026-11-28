@@ -25,6 +25,7 @@ class Expediente:
         self.prioridad = "Normal"
         self.calificacion = "Pendiente"
         self.comentario_mejora = "Ninguno"
+        self.historial = []
 
     def tiempo_total(self):
         if self.fecha_registro == "Sin fecha":
