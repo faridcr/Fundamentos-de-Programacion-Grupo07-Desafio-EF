@@ -24,3 +24,16 @@ def registrar_paso(expediente, detalle):
     }
 
     expediente.historial.append(paso)
+
+def mostrar_hoja_de_ruta(expediente):
+
+    print("\n=== HOJA DE RUTA DEL EXPEDIENTE", expediente.codigo, "===")
+
+    if len(expediente.historial) == 0:
+        print("Sin historial registrado")
+        return
+
+    for paso in expediente.historial:
+        print("Paso", paso["paso"], "|", paso["fecha"], "|", paso["area"], "|", paso["estado"])
+        print("   Detalle:", paso["detalle"])
+
