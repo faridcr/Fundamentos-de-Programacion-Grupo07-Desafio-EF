@@ -376,3 +376,24 @@ def pedir_comentario_mejora():
             return comentario
 
         print("ERROR: El comentario no puede estar vacío.")
+
+
+def calificar_atencion(dni):
+
+    print("\n=== CALIFICAR ATENCION ===")
+
+    pendientes = []
+
+    for expediente in expedientes:
+
+        if expediente.dni == dni and expediente.estado == "Cerrado" and expediente.calificacion == "Pendiente":
+            pendientes.append(expediente)
+
+    if len(pendientes) == 0:
+        print("No tienes expedientes cerrados pendientes de calificar.")
+        return
+
+    for expediente in pendientes:
+        print(expediente.codigo, "-", expediente.asunto)
+
+    codigo = input("Ingrese el código del expediente a calificar: ").strip().upper()
