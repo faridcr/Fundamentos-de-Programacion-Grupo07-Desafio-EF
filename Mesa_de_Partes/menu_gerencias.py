@@ -198,15 +198,15 @@ def menu_atencion(area, nivel):
         print("4. Registrar atención")
         print("5. Emitir respuesta y cerrar")
         print("6. Devolver por área incorrecta")
-        print("7. Volver")
-
+        print("7. Ver calificaciones")
+        print("8. Volver")
         opcion = input("Elige una opción: ")
 
-        if opcion == "7":
+        if opcion == "8":
             break
 
-        elif opcion == "1":
-            ver_expedientes(nivel, area)
+        elif opcion == "7":
+            ver_calificaciones(nivel, area)
 
         elif opcion in ("2", "3", "4", "5", "6"):
 
