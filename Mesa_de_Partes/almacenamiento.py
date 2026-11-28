@@ -180,7 +180,8 @@ def guardar_expedientes():
             "fecha_cierre": expediente.fecha_cierre,
             "prioridad": expediente.prioridad,
             "calificacion": expediente.calificacion,
-            "comentario_mejora": expediente.comentario_mejorar
+            "comentario_mejora": expediente.comentario_mejora,
+            "historial": expediente.historial
 
         }
 
