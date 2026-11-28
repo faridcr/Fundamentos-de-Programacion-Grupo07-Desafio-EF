@@ -176,7 +176,10 @@ def guardar_expedientes():
             "motivo_devolucion": expediente.motivo_devolucion,
             "fecha_registro": expediente.fecha_registro,
             "fecha_cierre": expediente.fecha_cierre,
-            "prioridad": expediente.prioridad
+            "prioridad": expediente.prioridad,
+            "calificacion": expediente.calificacion,
+            "comentario_mejora": expediente.comentario_mejorar
+
         }
 
         datos.append(dato)
