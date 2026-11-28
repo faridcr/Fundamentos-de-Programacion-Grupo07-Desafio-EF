@@ -161,6 +161,7 @@ def buscar_expediente():
         if expediente.codigo == codigo:
 
             mostrar_expediente_completo(expediente)
+            mostrar_hoja_de_ruta(expediente)
             encontrado = True
             break
 
