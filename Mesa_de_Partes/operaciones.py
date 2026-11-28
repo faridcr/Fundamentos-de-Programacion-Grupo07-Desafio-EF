@@ -2,7 +2,7 @@ from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
 from datetime import datetime
-from hoja_ruta import registrar_paso
+from hoja_ruta import registrar_paso, mostrar_hoja_de_ruta
 
 def buscar_ciudadano(dni):
 
@@ -414,3 +414,17 @@ def calificar_atencion(dni):
             return
 
     print("Código incorrecto: ese expediente no está en la lista.")
+
+def ver_hoja_de_ruta(dni):
+
+    print("\n=== VER HOJA DE RUTA ===")
+
+    codigo = input("Ingrese el código del expediente: ").strip().upper()
+
+    for expediente in expedientes:
+
+        if expediente.codigo == codigo and expediente.dni == dni:
+            mostrar_hoja_de_ruta(expediente)
+            return
+
+    print("Expediente no encontrado entre tus solicitudes.")
