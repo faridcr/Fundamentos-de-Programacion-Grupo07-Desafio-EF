@@ -1,6 +1,7 @@
 from estado import expedientes
 from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes, ordenar_expedientes_por_prioridad
 from almacenamiento import guardar_expedientes
+from hoja_ruta import registrar_paso
 from operaciones import mostrar_expediente_completo, derivar_expediente, buscar_expediente, ordenar_expedientes, ver_tiempos
 
 def menu_mesa_partes():
@@ -57,6 +58,7 @@ def menu_mesa_partes():
                         if confirmar == "1":
 
                             expediente.estado = "Validado"
+                            registrar_paso(expediente, "Solicitud validada por Mesa de Partes")
                             guardar_expedientes()
 
                             print("Expediente validado correctamente.")
