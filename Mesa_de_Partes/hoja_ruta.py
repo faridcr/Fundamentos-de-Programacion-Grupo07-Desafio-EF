@@ -5,7 +5,15 @@ FORMATO_FECHA = "%d/%m/%Y %H:%M"
 
 def registrar_paso(expediente, detalle):
 
-    area = "Mesa de Partes"
+        # Área donde está el expediente en este momento
+    if expediente.subgerencia != "Sin asignar":
+        area = expediente.subgerencia
+
+    elif expediente.gerencia != "Sin asignar":
+        area = expediente.gerencia
+
+    else:
+        area = "Mesa de Partes"
 
     paso = {
         "paso": len(expediente.historial) + 1,
