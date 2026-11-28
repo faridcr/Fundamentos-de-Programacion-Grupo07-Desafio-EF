@@ -57,11 +57,11 @@
         "asunto": "Vereda deteriorada",
         "descripcion": "La vereda presenta grietas y dificulta el paso peatonal.",
         "direccion": "lAS FLORES",
-        "estado": "Derivado a gerencia",
+        "estado": "Cerrado",
         "gerencia": "Desarrollo Urbano",
         "subgerencia": "Sin asignar",
-        "atencion": "Pendiente",
-        "respuesta": "Pendiente",
+        "atencion": "Se realizó la inspección de la vereda y se identificaron grietas que dificultan el paso peatonal. Se solicita programar su reparación.",
+        "respuesta": "Se realizó la inspección de la vereda ubicada en Las Flores. Se identificaron grietas que dificultan el paso peatonal. Se programará el mantenimiento y reparación correspondiente para garantizar la seguridad de los vecinos.",
         "motivo_devolucion": "Ninguno"
     },
     {

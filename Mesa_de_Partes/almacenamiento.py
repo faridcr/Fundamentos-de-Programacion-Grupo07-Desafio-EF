@@ -1,5 +1,7 @@
 import json
 import os
+import shutil
+from datetime import datetime
 
 from ciudadano import Ciudadano
 from expediente import Expediente
@@ -12,6 +14,7 @@ from estado import ciudadanos, expedientes, trabajadores, subgerencias, gerencia
 # Usa la carpeta "datos" si existe; si no, la misma carpeta de los .py
 CARPETA = os.path.dirname(os.path.abspath(__file__))
 CARPETA_DATOS = os.path.join(CARPETA, "datos")
+CARPETA_COPIAS = os.path.join(CARPETA, "copias_seguridad")
 
 
 def ruta(nombre):
@@ -36,10 +39,35 @@ def leer_json(nombre, por_defecto):
     return por_defecto
 
 
+
+def crear_copia_seguridad(nombre):
+    archivo_original = ruta(nombre)
+
+    if not os.path.exists(archivo_original):
+        return
+
+    os.makedirs(CARPETA_COPIAS, exist_ok=True)
+
+    fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
+    nombre_base, extension = os.path.splitext(nombre)
+
+    archivo_copia = os.path.join(
+        CARPETA_COPIAS,
+        f"{nombre_base}_{fecha}{extension}"
+    )
+
+    shutil.copy2(archivo_original, archivo_copia)
+
+    print("Copia de seguridad creada correctamente.")
+
+
 def escribir_json(nombre, datos):
+    crear_copia_seguridad(nombre)
 
     with open(ruta(nombre), "w", encoding="utf-8") as archivo:
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
+
+   
 
 
 # CARGAR AREAS (GERENCIAS Y SUBGERENCIAS)
