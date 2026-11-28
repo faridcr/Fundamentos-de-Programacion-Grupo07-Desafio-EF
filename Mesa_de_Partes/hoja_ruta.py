@@ -35,5 +35,18 @@ def mostrar_hoja_de_ruta(expediente):
 
     for paso in expediente.historial:
         print("Paso", paso["paso"], "|", paso["fecha"], "|", paso["area"], "|", paso["estado"])
-        print("   Detalle:", paso["detalle"])
+        print("  Detalle:", paso["detalle"])
+
+    print("\nDías transcurridos:", dias_transcurridos(expediente))
+
+def dias_transcurridos(expediente):
+
+    if len(expediente.historial) < 2:
+        return 0
+
+    primero = datetime.strptime(expediente.historial[0]["fecha"], FORMATO_FECHA)
+    ultimo = datetime.strptime(expediente.historial[-1]["fecha"], FORMATO_FECHA)
+
+    return (ultimo - primero).days
+
 
