@@ -250,6 +250,8 @@ def derivar_expediente():
                         expediente.subgerencia = "Sin asignar"
                         expediente.estado = "Derivado a gerencia"
                         expediente.motivo_devolucion = "Ninguno"
+                        
+                        registrar_paso(expediente, "Derivado a " + expediente.gerencia)
 
                         guardar_expedientes()
 
