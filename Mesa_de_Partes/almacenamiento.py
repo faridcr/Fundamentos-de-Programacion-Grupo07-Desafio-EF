@@ -149,7 +149,9 @@ def cargar_expedientes():
         expediente.atencion = dato["atencion"]
         expediente.respuesta = dato["respuesta"]
         expediente.motivo_devolucion = dato.get("motivo_devolucion", "Ninguno")
-
+        expediente.fecha_registro = dato.get("fecha_registro", "Sin fecha")
+        expediente.fecha_cierre = dato.get("fecha_cierre", "Pendiente")
+        expediente.prioridad = dato.get("prioridad", "Normal")
         expedientes.append(expediente)
 
 
@@ -171,7 +173,10 @@ def guardar_expedientes():
             "subgerencia": expediente.subgerencia,
             "atencion": expediente.atencion,
             "respuesta": expediente.respuesta,
-            "motivo_devolucion": expediente.motivo_devolucion
+            "motivo_devolucion": expediente.motivo_devolucion,
+            "fecha_registro": expediente.fecha_registro,
+            "fecha_cierre": expediente.fecha_cierre,
+            "prioridad": expediente.prioridad
         }
 
         datos.append(dato)
@@ -185,3 +190,4 @@ def cargar_todo():
     cargar_trabajadores()
     cargar_ciudadanos()
     cargar_expedientes()
+

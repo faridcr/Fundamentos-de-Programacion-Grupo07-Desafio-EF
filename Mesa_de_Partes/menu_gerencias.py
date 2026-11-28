@@ -1,7 +1,7 @@
 from estado import expedientes, subgerencias
 from operaciones import mostrar_expediente_completo
 from almacenamiento import guardar_expedientes
-
+from expediente import ahora
 
 # ---------------------------------------------------------------
 # FUNCIONES COMUNES (las usan todos los menús)
@@ -256,6 +256,7 @@ def cerrar_expediente(expediente):
 
     expediente.respuesta = respuesta
     expediente.estado = "Cerrado"
+    expediente.fecha_cierre = ahora()
     guardar_expedientes()
 
     print("Expediente cerrado correctamente.")

@@ -1,3 +1,11 @@
+from datetime import datetime
+
+FORMATO = "%d/%m/%Y %H:%M:%S"
+
+
+def ahora():
+    return datetime.now().strftime(FORMATO)
+
 
 class Expediente:
     def __init__(self, codigo, dni, asunto, descripcion, direccion):
@@ -12,6 +20,27 @@ class Expediente:
         self.atencion = "Pendiente"
         self.respuesta = "Pendiente"
         self.motivo_devolucion = "Ninguno"
+        self.fecha_registro = ahora()
+        self.fecha_cierre = "Pendiente"
+        self.prioridad = "Normal"
+
+    def tiempo_total(self):
+        if self.fecha_registro == "Sin fecha":
+            return "Sin datos"
+
+        inicio = datetime.strptime(self.fecha_registro, FORMATO)
+
+        if self.fecha_cierre == "Pendiente":
+            fin = datetime.now()
+        else:
+            fin = datetime.strptime(self.fecha_cierre, FORMATO)
+
+        segundos = int((fin - inicio).total_seconds())
+        horas, resto = divmod(segundos, 3600)
+        minutos, seg = divmod(resto, 60)
+
+        return str(horas) + "h " + str(minutos) + "m " + str(seg) + "s"
+
 
     def mostrar_datos(self):
         print("\n=== DATOS DEL EXPEDIENTE ===")
@@ -21,6 +50,7 @@ class Expediente:
         print("Descripción:", self.descripcion)
         print("Dirección:", self.direccion)
         print("Estado:", self.estado)
+        print("Prioridad:", self.prioridad)
         print("Gerencia:", self.gerencia)
         print("Subgerencia:", self.subgerencia)
         print("Atención realizada:", self.atencion)

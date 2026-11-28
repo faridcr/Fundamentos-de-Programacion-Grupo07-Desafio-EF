@@ -1,7 +1,7 @@
 from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
-
+from datetime import datetime
 
 def buscar_ciudadano(dni):
 
@@ -57,7 +57,25 @@ def mostrar_expediente_completo(expediente):
 
     expediente.mostrar_datos()
 
+def seleccionar_prioridad():
+    while True:
+        print("\n=== SELECCIONAR PRIORIDAD ===")
+        print("1. Normal")
+        print("2. Urgente")
+        print("3. Muy urgente")
 
+        opcion = input("Seleccione una opción: ").strip()
+
+        prioridades = {
+            "1": "Normal",
+            "2": "Urgente",
+            "3": "Muy urgente"
+        }
+
+        if opcion in prioridades:
+            return prioridades[opcion]
+
+        print("ERROR: Seleccione una opción válida.")
 def registrar_expediente(dni):
 
     print("\n=== REGISTRAR SOLICITUD ===")
@@ -98,14 +116,18 @@ def registrar_expediente(dni):
 
     codigo = "E-" + str(numero)
 
+   
     expediente = Expediente(
         codigo, dni, asunto, descripcion, direccion
     )
+
+    expediente.prioridad = seleccionar_prioridad()
 
     expedientes.append(expediente)
     guardar_expedientes()
 
     print("\nSolicitud registrada correctamente.")
+    print("Fecha y hora de registro:", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
     mostrar_expediente_completo(expediente)
 
 
@@ -143,29 +165,54 @@ def buscar_expediente():
     if encontrado == False:
         print("Expediente no encontrado.")
 
-
 def ordenar_expedientes():
-
     print("\n=== EXPEDIENTES ORDENADOS ===")
 
     if len(expedientes) == 0:
         print("No hay expedientes para ordenar.")
         return
 
-    # Los códigos con formato raro van al final
+    # Ordenar por codigo
     ordenados = sorted(
         expedientes,
-        key=lambda e: (numero_de_codigo(e) is None, numero_de_codigo(e) or 0)
+        key=lambda e: (
+            numero_de_codigo(e) is None,
+            numero_de_codigo(e) or 0
+        )
     )
 
     for expediente in ordenados:
-
         print("\nCódigo:", expediente.codigo)
         print("Asunto:", expediente.asunto)
         print("Estado:", expediente.estado)
         print("Gerencia:", expediente.gerencia)
         print("Subgerencia:", expediente.subgerencia)
+        
+def ordenar_expedientes_por_prioridad():
+    print("\n=== EXPEDIENTES POR PRIORIDAD ===")
 
+    if not expedientes:
+        print("No hay expedientes registrados.")
+        return
+
+    niveles = {
+        "Muy urgente": 1,
+        "Urgente": 2,
+        "Normal": 3
+    }
+
+    ordenados = sorted(
+        expedientes,
+        key=lambda e: niveles.get(
+            getattr(e, "prioridad", "Normal"), 3
+        )
+    )
+
+    for expediente in ordenados:
+        print("\nCódigo:", expediente.codigo)
+        print("Asunto:", expediente.asunto)
+        print("Prioridad:", getattr(expediente, "prioridad", "Normal"))
+        print("Estado:", expediente.estado)
 
 def derivar_expediente():
 
@@ -287,3 +334,18 @@ def derivar_expediente():
 
     print("\nExpediente actualizado correctamente.")
     expediente_encontrado.mostrar_datos()
+def ver_tiempos():
+
+    print("\n=== TIEMPO DE TRAMITE (SOLO PERSONAL) ===")
+
+    if len(expedientes) == 0:
+        print("No hay expedientes.")
+        return
+
+    for expediente in expedientes:
+
+        print("\nCódigo:", expediente.codigo)
+        print("Estado:", expediente.estado)
+        print("Fecha de registro:", expediente.fecha_registro)
+        print("Fecha de cierre:", expediente.fecha_cierre)
+        print("Tiempo total:", expediente.tiempo_total())
