@@ -150,6 +150,10 @@ def cargar_expedientes():
         expediente.respuesta = dato["respuesta"]
         expediente.motivo_devolucion = dato.get("motivo_devolucion", "Ninguno")
         expediente.prioridad = dato.get("prioridad", "Normal")
+        expediente.prioridad_solicitada = dato.get("prioridad_solicitada")
+        expediente.justificacion_prioridad = dato.get("justificacion_prioridad", "")
+        expediente.fecha_verificacion_prioridad = dato.get("fecha_verificacion_prioridad")
+        expediente.fecha_limite = dato.get("fecha_limite")
         expedientes.append(expediente)
 
 
@@ -172,7 +176,11 @@ def guardar_expedientes():
             "atencion": expediente.atencion,
             "respuesta": expediente.respuesta,
             "motivo_devolucion": expediente.motivo_devolucion,
-            "prioridad": expediente.prioridad
+            "prioridad": expediente.prioridad,
+            "prioridad_solicitada": expediente.prioridad_solicitada,
+            "justificacion_prioridad": expediente.justificacion_prioridad,
+            "fecha_verificacion_prioridad": expediente.fecha_verificacion_prioridad,
+            "fecha_limite": expediente.fecha_limite
         }
 
         datos.append(dato)

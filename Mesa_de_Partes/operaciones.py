@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from expediente import Expediente
 from estado import ciudadanos, expedientes, gerencias
 from almacenamiento import guardar_expedientes
@@ -40,6 +42,81 @@ def mostrar_expediente_completo(expediente):
         print("Fecha de emisión del DNI:", ciudadano.fecha_emision_dni)
 
     expediente.mostrar_datos()
+
+def revisar_prioridad():
+    codigo = input("Ingrese el código del expediente: ").strip().upper()
+
+    for expediente in expedientes:
+        if expediente.codigo == codigo:
+            if expediente.estado == "Cerrado":
+                print("El expediente está cerrado.")
+                return
+
+            print("\n=== REVISIÓN DE URGENCIA ===")
+            print("Expediente:", expediente.codigo)
+            print("Asunto:", expediente.asunto)
+            print(
+                "Prioridad solicitada:",
+                expediente.prioridad_solicitada or "Sin registrar",
+            )
+
+            print("\nElige la prioridad de atención:")
+            prioridad_elegida = seleccionar_prioridad()
+
+            justificacion = input("Justifique su decisión: ").strip()
+            while not justificacion:
+                justificacion = input("La justificación es obligatoria: ").strip()
+
+            expediente.prioridad = prioridad_elegida
+            expediente.justificacion_prioridad = justificacion
+
+            plazos = {"Normal": 7, "Urgente": 3, "Muy urgente": 1}
+            fecha_revision = datetime.now()
+            dias = plazos[prioridad_elegida]
+
+            expediente.fecha_verificacion_prioridad = fecha_revision.isoformat(
+                timespec="seconds"
+            )
+            expediente.fecha_limite = (
+                fecha_revision.date() + timedelta(days=dias)
+            ).isoformat()
+            guardar_expedientes()
+
+            print("Prioridad asignada:", expediente.prioridad)
+            return
+
+    print("No se encontró un expediente con ese código.")
+
+
+def consultar_vencimientos():
+    hoy = datetime.now().date()
+    hay_resultados = False
+
+    print("\n=== EXPEDIENTES PRÓXIMOS A VENCER O VENCIDOS ===")
+
+    for expediente in expedientes:
+        if expediente.estado == "Cerrado" or not expediente.fecha_limite:
+            continue
+
+        fecha_limite = datetime.fromisoformat(expediente.fecha_limite).date()
+        dias_restantes = (fecha_limite - hoy).days
+
+        if dias_restantes > 2:
+            continue
+
+        if dias_restantes < 0:
+            aviso = "Vencido"
+        elif dias_restantes == 0:
+            aviso = "Vence hoy"
+        else:
+            aviso = f"Vence en {dias_restantes} día(s)"
+
+        print(f"{expediente.codigo} | {expediente.fecha_limite} | {aviso}")
+        hay_resultados = True
+
+    if not hay_resultados:
+        print("No hay expedientes próximos a vencer ni vencidos.")
+
 
 def seleccionar_prioridad():
     while True:
@@ -100,12 +177,12 @@ def registrar_expediente(dni):
 
     codigo = "E-" + str(numero)
 
-   
+
     expediente = Expediente(
         codigo, dni, asunto, descripcion, direccion
     )
 
-    expediente.prioridad = seleccionar_prioridad()
+    expediente.prioridad_solicitada = seleccionar_prioridad()
 
     expedientes.append(expediente)
     guardar_expedientes()
@@ -170,7 +247,7 @@ def ordenar_expedientes():
         print("Estado:", expediente.estado)
         print("Gerencia:", expediente.gerencia)
         print("Subgerencia:", expediente.subgerencia)
-        
+
 def ordenar_expedientes_por_prioridad():
     print("\n=== EXPEDIENTES POR PRIORIDAD ===")
 
