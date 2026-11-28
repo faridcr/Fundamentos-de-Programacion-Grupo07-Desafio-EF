@@ -249,6 +249,8 @@ def iniciar_evaluacion(expediente, estado_recibido):
         return
 
     expediente.estado = "En evaluacion"
+    registrar_paso(expediente, "Evaluación iniciada")
+    
     guardar_expedientes()
 
     print("Evaluación iniciada.")
@@ -268,6 +270,7 @@ def registrar_atencion(expediente):
 
     expediente.atencion = atencion
     expediente.estado = "Atendido"
+    registrar_paso(expediente, "Atención registrada")
     guardar_expedientes()
 
     print("Atención registrada correctamente.")
@@ -288,6 +291,7 @@ def cerrar_expediente(expediente):
     expediente.respuesta = respuesta
     expediente.estado = "Cerrado"
     expediente.fecha_cierre = ahora()
+    registrar_paso(expediente, "Respuesta emitida y expediente cerrado")
     guardar_expedientes()
 
     print("Expediente cerrado correctamente.")
